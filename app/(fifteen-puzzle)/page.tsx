@@ -39,7 +39,7 @@ export default function FifteenPuzzleHome() {
         <div className="w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] bg-accent"></div>
       </div>
       <div className="w-[350px] sm:w-[500px] h-[60px] border bg-black/30 backdrop-blur-xs flex items-center justify-center">Restart</div>
-      <div className="w-[350px] sm:w-[500px] h-[60px] flex items-center justify-center px-4">Move tiles in grid to order them from 1 to 15.</div>
+      {/* <div className="w-[350px] sm:w-[500px] h-[60px] flex items-center justify-center px-4">Move tiles in grid to order them from 1 to 15.</div> */}
     </div>
   );
 }
