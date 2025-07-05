@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap");
+
 .bg-grid {
   --opacity: 0.2;
   --primary-rgb: 255, 255, 255;
@@ -6,4 +8,11 @@
     linear-gradient(to right, rgb(var(--primary-rgb), var(--opacity)) 1px, transparent 1px);
   background-size: 50px 50px;
   background-attachment: fixed;
+}
+
+.inconsolata {
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
