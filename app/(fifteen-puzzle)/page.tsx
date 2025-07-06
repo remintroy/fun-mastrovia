@@ -1,5 +1,7 @@
 "use client";
 
+import useAudio from "@/hooks/useAudio";
+import usePermissions from "@/hooks/usePermissions";
 import { cn } from "@/lib/utils";
 import { VibrateIcon, Volume2Icon } from "lucide-react";
 import { useState } from "react";
@@ -53,18 +55,52 @@ const moveTile = (matrix: number[][], x: number, y: number) => {
   return newMatrix;
 };
 
+const shuffleMatrix = (solution: number[][]): number[][] => {
+  const size = solution.length;
+  const matrix = JSON.parse(JSON.stringify(solution));
+  let emptyPos = { x: size - 1, y: size - 1 };
+
+  // Perform more moves for larger grids to ensure proper shuffling
+  const moveCount = Math.max(200, 100 * size * size);
+
+  for (let i = 0; i < moveCount; i++) {
+    const possibleMoves = [];
+
+    // Check all possible moves
+    if (emptyPos.x > 0) possibleMoves.push({ x: emptyPos.x - 1, y: emptyPos.y }); // up
+    if (emptyPos.x < size - 1) possibleMoves.push({ x: emptyPos.x + 1, y: emptyPos.y }); // down
+    if (emptyPos.y > 0) possibleMoves.push({ x: emptyPos.x, y: emptyPos.y - 1 }); // left
+    if (emptyPos.y < size - 1) possibleMoves.push({ x: emptyPos.x, y: emptyPos.y + 1 }); // right
+
+    // Avoid moving back to the previous position
+    const move = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+
+    // Perform move
+    matrix[emptyPos.x][emptyPos.y] = matrix[move.x][move.y];
+    matrix[move.x][move.y] = -1;
+    emptyPos = move;
+  }
+
+  return matrix;
+};
+
+const solution = generateCleanMatrix();
+
 export default function FifteenPuzzleHome() {
-  const [matrix, setMatrix] = useState<number[][]>(generateCleanMatrix());
+  const [matrix, setMatrix] = useState<number[][]>(shuffleMatrix(solution));
+  const permission = usePermissions();
+  // const audio = useAudio();
 
   const handleTileClick = (x: number, y: number) => {
     const newMatrix = moveTile(matrix, x, y);
     if (newMatrix) {
+      // audio.playMoveAudio();
       setMatrix(newMatrix);
     }
   };
 
   const handleResetClick = () => {
-    setMatrix(generateCleanMatrix());
+    setMatrix(shuffleMatrix(solution));
   };
 
   return (
@@ -106,7 +142,7 @@ export default function FifteenPuzzleHome() {
             );
           });
         })}
-        <div className="w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] bg-accent"></div>
+        {/* <div className="w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] bg-accent"></div> */}
       </div>
       <div
         onClick={handleResetClick}
