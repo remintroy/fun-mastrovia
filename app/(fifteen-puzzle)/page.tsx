@@ -134,7 +134,10 @@ export default function FifteenPuzzleHome() {
                 onClick={() => handleTileClick(rowIndex, colIndex)}
                 className={cn(
                   "w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] bg-[#fdffef] text-black flex items-center justify-center text-xl font-bold cursor-pointer",
-                  item == -1 ? "bg-accent" : ""
+                  matrix[rowIndex][colIndex] == -1 ? "cursor-default" : "cursor-pointer",
+                  matrix[rowIndex][colIndex] == solution[rowIndex][colIndex] ? "bg-[#fdffef]" : "bg-[#fdffefce]",
+                  item == -1 ? "bg-accent" : "",
+                  "rounded-md select-none"
                 )}
               >
                 {item == -1 ? "" : item}
