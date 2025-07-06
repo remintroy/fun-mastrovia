@@ -88,6 +88,7 @@ const solution = generateCleanMatrix();
 
 export default function FifteenPuzzleHome() {
   const [matrix, setMatrix] = useState<number[][]>(shuffleMatrix(solution));
+  const [moves, setMoves] = useState(0);
   const permission = usePermissions();
   // const audio = useAudio();
 
@@ -96,36 +97,38 @@ export default function FifteenPuzzleHome() {
     if (newMatrix) {
       // audio.playMoveAudio();
       setMatrix(newMatrix);
+      setMoves((moves) => ++moves);
     }
   };
 
   const handleResetClick = () => {
     setMatrix(shuffleMatrix(solution));
+    setMoves(0);
   };
 
   return (
     <div className="w-full h-full flex flex-col gap-[10px] items-center justify-center">
       <div className="w-[350px] sm:w-[500px] h-[60px] flex justify-between gap-[10px]">
-        <div className="border bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px]">
+        <div className="border bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md">
           <div>
             <div className="text-gray-300 text-sm">Time</div>
             <div className="text-xl leading-5">10s</div>
           </div>
           <div>
             <div className="text-gray-300 text-sm">Moves</div>
-            <div className="text-xl leading-5">10</div>
+            <div className="text-xl leading-5">{moves}</div>
           </div>
         </div>
         <div className="flex gap-[10px]">
-          <div className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px]">
+          <div className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer">
             <VibrateIcon />
           </div>
-          <div className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px]">
+          <div className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer">
             <Volume2Icon />
           </div>
         </div>
       </div>
-      <div className="w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] gap-[10px] p-[15px] sm:p-[25px] box-border border bg-black/30 backdrop-blur-xs grid grid-cols-4 ">
+      <div className="w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] gap-[10px] p-[15px] sm:p-[25px] box-border border bg-black/30 backdrop-blur-xs grid grid-cols-4 rounded-md">
         {matrix.map((row, rowIndex) => {
           return row?.map((item, colIndex) => {
             return (
@@ -149,7 +152,7 @@ export default function FifteenPuzzleHome() {
       </div>
       <div
         onClick={handleResetClick}
-        className="w-[350px] sm:w-[500px] h-[60px] border bg-black/30 backdrop-blur-xs flex items-center justify-center"
+        className="w-[350px] sm:w-[500px] h-[60px] border bg-black/30 backdrop-blur-xs flex items-center justify-center rounded-md select-none cursor-pointer"
       >
         Restart
       </div>
