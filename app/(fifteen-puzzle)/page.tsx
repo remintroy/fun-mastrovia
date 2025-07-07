@@ -162,7 +162,12 @@ export default function FifteenPuzzleHome() {
             });
           })}
         {completed && (
-          <div className="absolute left-0 top-0 w-full h-full flex items-center justify-center">Nice Job! You nailed it</div>
+          <div className="absolute left-0 top-0 w-full h-full flex flex-col gap-1 items-center justify-center">
+            <p className="text-lg">Nice Job! You nailed it</p>
+            <p>
+              You did it in <span className="font-bold">{moves}</span> moves
+            </p>
+          </div>
         )}
       </div>
       <div
