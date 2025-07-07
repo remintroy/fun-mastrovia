@@ -84,12 +84,22 @@ const shuffleMatrix = (solution: number[][]): number[][] => {
   return matrix;
 };
 
+const isCompleted = (matrix: number[][], solution: number[][]) => {
+  for (let i = 0; i < solution?.length; i++) {
+    for (let j = 0; j < solution?.length; j++) {
+      if (matrix[i][j] != solution[i][j]) return false;
+    }
+  }
+  return true;
+};
+
 const solution = generateCleanMatrix();
 
 export default function FifteenPuzzleHome() {
   const [matrix, setMatrix] = useState<number[][]>(shuffleMatrix(solution));
   const [moves, setMoves] = useState(0);
-  const permission = usePermissions();
+  const [completed, setCompleted] = useState(false);
+  // const permission = usePermissions();
   // const audio = useAudio();
 
   const handleTileClick = (x: number, y: number) => {
@@ -98,12 +108,14 @@ export default function FifteenPuzzleHome() {
       // audio.playMoveAudio();
       setMatrix(newMatrix);
       setMoves((moves) => ++moves);
+      setCompleted(isCompleted(newMatrix, solution));
     }
   };
 
   const handleResetClick = () => {
     setMatrix(shuffleMatrix(solution));
     setMoves(0);
+    setCompleted(false);
   };
 
   return (
@@ -128,27 +140,30 @@ export default function FifteenPuzzleHome() {
           </div>
         </div>
       </div>
-      <div className="w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] gap-[10px] p-[15px] sm:p-[25px] box-border border bg-black/30 backdrop-blur-xs grid grid-cols-4 rounded-md">
-        {matrix.map((row, rowIndex) => {
-          return row?.map((item, colIndex) => {
-            return (
-              <div
-                key={item}
-                onClick={() => handleTileClick(rowIndex, colIndex)}
-                className={cn(
-                  "w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] bg-[#fdffef] text-black flex items-center justify-center text-xl font-bold cursor-pointer",
-                  matrix[rowIndex][colIndex] == -1 ? "cursor-default" : "cursor-pointer",
-                  matrix[rowIndex][colIndex] == solution[rowIndex][colIndex] ? "bg-[#fdffef]" : "bg-[#fdffefce]",
-                  item == -1 ? "bg-accent" : "",
-                  "rounded-md select-none"
-                )}
-              >
-                {item == -1 ? "" : item}
-              </div>
-            );
-          });
-        })}
-        {/* <div className="w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] bg-accent"></div> */}
+      <div className="w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] gap-[10px] p-[15px] sm:p-[25px] box-border border bg-black/30 backdrop-blur-xs grid grid-cols-4 rounded-md relative">
+        {!completed &&
+          matrix.map((row, rowIndex) => {
+            return row?.map((item, colIndex) => {
+              return (
+                <div
+                  key={item}
+                  onClick={() => handleTileClick(rowIndex, colIndex)}
+                  className={cn(
+                    "w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] bg-[#fdffef] text-black flex items-center justify-center text-xl font-bold cursor-pointer",
+                    matrix[rowIndex][colIndex] == -1 ? "cursor-default" : "cursor-pointer",
+                    matrix[rowIndex][colIndex] == solution[rowIndex][colIndex] ? "bg-[#fdffef]" : "bg-[#fdffefce]",
+                    item == -1 ? "bg-accent" : "",
+                    "rounded-md select-none"
+                  )}
+                >
+                  {item == -1 ? "" : item}
+                </div>
+              );
+            });
+          })}
+        {completed && (
+          <div className="absolute left-0 top-0 w-full h-full flex items-center justify-center">Nice Job! You nailed it</div>
+        )}
       </div>
       <div
         onClick={handleResetClick}
