@@ -129,6 +129,7 @@ export default function FifteenPuzzleHome() {
       setMoves((moves) => ++moves);
       setCompleted(isCompleted(newMatrix, solution));
       if (permission.allowAudio) audioRef?.current?.play();
+      if (permission.allowVibrate) navigator?.vibrate?.(50);
       if (!started) {
         setStarted(true);
       }
