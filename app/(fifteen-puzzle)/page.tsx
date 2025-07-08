@@ -117,10 +117,28 @@ export default function FifteenPuzzleHome() {
   const [moves, setMoves] = useState(0);
   const [completed, setCompleted] = useState(false);
   const [started, setStarted] = useState(false);
-  const matrixRef = useRef(matrix);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const permission = usePermissions();
   const [timeCounter, setTimeCounter] = useState(0);
+  const matrixRef = useRef(matrix);
+  const permission = usePermissions();
+
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const audioBufferRef = useRef<AudioBuffer | null>(null);
+
+  useEffect(() => {
+    const initAudio = async () => {
+      if (!audioContextRef.current) {
+        const AudioContextClass = window.AudioContext || (window as any)?.webkitAudioContext;
+        audioContextRef.current = new AudioContextClass();
+      }
+
+      const res = await fetch("/fifteen-puzzle/bubble.mp3");
+      const arrayBuffer = await res.arrayBuffer();
+      const audioBuffer = await audioContextRef.current.decodeAudioData(arrayBuffer);
+      audioBufferRef.current = audioBuffer;
+    };
+
+    initAudio();
+  }, []);
 
   const handleTileMove = (x: number, y: number) => {
     const newMatrix = moveTile(matrixRef.current, x, y);
@@ -128,9 +146,11 @@ export default function FifteenPuzzleHome() {
       setMatrix(newMatrix);
       setMoves((moves) => ++moves);
       setCompleted(isCompleted(newMatrix, solution));
-      if (permission.allowAudio && audioRef?.current) {
-        audioRef.current.muted = false;
-        audioRef.current.play();
+      if (permission.allowAudio && audioContextRef.current && audioBufferRef.current) {
+        const source = audioContextRef.current.createBufferSource();
+        source.buffer = audioBufferRef.current;
+        source.connect(audioContextRef.current.destination);
+        source.start(0);
       }
       if (permission.allowVibrate) navigator?.vibrate?.(5);
       if (!started) setStarted(true);
@@ -198,7 +218,6 @@ export default function FifteenPuzzleHome() {
 
   return (
     <div className="w-full h-full flex flex-col gap-[10px] items-center justify-center">
-      <audio src="/fifteen-puzzle/bubble.mp3" muted={false} ref={audioRef} controls/>
       <div className="w-[350px] sm:w-[500px] h-[60px] flex justify-between gap-[10px]">
         <div className="border bg-black/30 backdrop-blur-xs h-full p-2 px-4 flex gap-[20px] rounded-md w-min">
           <div className="min-w-[55px]">
