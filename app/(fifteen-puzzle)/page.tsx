@@ -202,7 +202,7 @@ export default function FifteenPuzzleHome() {
         <div className="border bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md">
           <div>
             <div className="text-gray-300 text-sm">Time</div>
-            <div className="text-xl leading-5">{formatTime(timeCounter)}</div>
+            <div className="text-xl leading-5 whitespace-nowrap">{formatTime(timeCounter)}</div>
           </div>
           <div>
             <div className="text-gray-300 text-sm">Moves</div>
