@@ -122,6 +122,13 @@ export default function FifteenPuzzleHome() {
   const matrixRef = useRef(matrix);
   const permission = usePermissions();
   const setPermissions = useSettingsStore((state) => state.setPermissions);
+  const [isVibrateSupported, setIsVibrateSupported] = useState(false);
+
+  useEffect(() => {
+    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+      setIsVibrateSupported(true);
+    }
+  }, []);
 
   const audioContextRef = useRef<AudioContext | null>(null);
   const audioBufferRef = useRef<AudioBuffer | null>(null);
@@ -232,17 +239,23 @@ export default function FifteenPuzzleHome() {
           </div>
         </div>
         <div className="flex gap-[10px]">
-          {"vibrate" in navigator && (
-            <div
-              onClick={() => setPermissions("allowVibrate", !permission?.allowVibrate)}
-              className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer"
-            >
-              {permission?.allowVibrate ? <VibrateIcon /> : <VibrateOff />}
-            </div>
-          )}
+          <div
+            onClick={() => setPermissions("allowVibrate", !permission?.allowVibrate)}
+            className={cn(
+              "border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer",
+              permission?.allowVibrate ? "text-green-200" : "text-red-200",
+              isVibrateSupported ? "flex" : "hidden"
+            )}
+          >
+            {permission?.allowVibrate ? <VibrateIcon /> : <VibrateOff />}
+          </div>
+
           <div
             onClick={() => setPermissions("allowAudio", !permission?.allowAudio)}
-            className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer"
+            className={cn(
+              "border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer",
+              permission?.allowAudio ? "text-green-200" : "text-red-200"
+            )}
           >
             {permission?.allowAudio ? <Volume2Icon /> : <VolumeOff />}
           </div>
