@@ -12,8 +12,8 @@ export interface SettingsState {
 
 export const useSettingsStore = create<SettingsState>((set) => ({
   permissions: {
-    allowAudio: false,
-    allowVibrate: false,
+    allowAudio: true,
+    allowVibrate: true,
   },
   setPermissions: (key, value) =>
     set((state) => ({
