@@ -154,10 +154,10 @@ export default function FifteenPuzzleHome() {
         source.connect(audioContextRef.current.destination);
         source.start(0);
       }
-      if (permission.allowVibrate) navigator?.vibrate?.(5);
+      if (permission.allowVibrate && "vibrate" in navigator) navigator?.vibrate?.(5);
       if (!started) setStarted(true);
     } else {
-      if (permission.allowVibrate) navigator?.vibrate?.([10, 0, 10]);
+      if (permission.allowVibrate && "vibrate" in navigator) navigator?.vibrate?.([10, 0, 10]);
     }
   };
 
@@ -232,12 +232,14 @@ export default function FifteenPuzzleHome() {
           </div>
         </div>
         <div className="flex gap-[10px]">
-          <div
-            onClick={() => setPermissions("allowVibrate", !permission?.allowVibrate)}
-            className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer"
-          >
-            {permission?.allowVibrate ? <VibrateIcon /> : <VibrateOff />}
-          </div>
+          {"vibrate" in navigator && (
+            <div
+              onClick={() => setPermissions("allowVibrate", !permission?.allowVibrate)}
+              className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer"
+            >
+              {permission?.allowVibrate ? <VibrateIcon /> : <VibrateOff />}
+            </div>
+          )}
           <div
             onClick={() => setPermissions("allowAudio", !permission?.allowAudio)}
             className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer"
