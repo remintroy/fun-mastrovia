@@ -129,10 +129,12 @@ export default function FifteenPuzzleHome() {
       setMoves((moves) => ++moves);
       setCompleted(isCompleted(newMatrix, solution));
       if (permission.allowAudio) audioRef?.current?.play();
-      if (permission.allowVibrate) navigator?.vibrate?.(10);
+      if (permission.allowVibrate) navigator?.vibrate?.(5);
       if (!started) {
         setStarted(true);
       }
+    } else {
+      if (permission.allowVibrate) navigator?.vibrate?.([10, 10]);
     }
   };
 
