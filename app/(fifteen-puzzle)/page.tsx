@@ -198,7 +198,7 @@ export default function FifteenPuzzleHome() {
 
   return (
     <div className="w-full h-full flex flex-col gap-[10px] items-center justify-center">
-      <audio src="/fifteen-puzzle/bubble.mp3" hidden muted={false} ref={audioRef} />
+      <audio src="/fifteen-puzzle/bubble.mp3" muted={false} ref={audioRef} controls/>
       <div className="w-[350px] sm:w-[500px] h-[60px] flex justify-between gap-[10px]">
         <div className="border bg-black/30 backdrop-blur-xs h-full p-2 px-4 flex gap-[20px] rounded-md w-min">
           <div className="min-w-[55px]">
