@@ -200,12 +200,13 @@ export default function FifteenPuzzleHome() {
     <div className="w-full h-full flex flex-col gap-[10px] items-center justify-center">
       <audio src="/fifteen-puzzle/bubble.mp3" hidden muted={false} ref={audioRef} />
       <div className="w-[350px] sm:w-[500px] h-[60px] flex justify-between gap-[10px]">
-        <div className="border bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md">
-          <div>
+        <div className="border bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md sm:w-full">
+          <div className="w-full flex items-center justify-center">Fifteen puzzle</div>
+          <div className="px-2 min-w-[55px]">
             <div className="text-gray-300 text-sm">Time</div>
             <div className="text-xl leading-5 whitespace-nowrap">{formatTime(timeCounter)}</div>
           </div>
-          <div>
+          <div className="px-2">
             <div className="text-gray-300 text-sm">Moves</div>
             <div className="text-xl leading-5">{moves}</div>
           </div>
