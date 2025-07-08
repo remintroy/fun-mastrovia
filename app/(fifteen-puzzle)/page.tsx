@@ -200,13 +200,12 @@ export default function FifteenPuzzleHome() {
     <div className="w-full h-full flex flex-col gap-[10px] items-center justify-center">
       <audio src="/fifteen-puzzle/bubble.mp3" hidden muted={false} ref={audioRef} />
       <div className="w-[350px] sm:w-[500px] h-[60px] flex justify-between gap-[10px]">
-        <div className="border bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md sm:w-full">
-          <div className="w-full flex items-center justify-center">Fifteen puzzle</div>
-          <div className="px-2 min-w-[55px]">
+        <div className="border bg-black/30 backdrop-blur-xs h-full p-2 px-4 flex gap-[20px] rounded-md w-min">
+          <div className="min-w-[55px]">
             <div className="text-gray-300 text-sm">Time</div>
             <div className="text-xl leading-5 whitespace-nowrap">{formatTime(timeCounter)}</div>
           </div>
-          <div className="px-2">
+          <div className="">
             <div className="text-gray-300 text-sm">Moves</div>
             <div className="text-xl leading-5">{moves}</div>
           </div>
@@ -231,9 +230,11 @@ export default function FifteenPuzzleHome() {
                   className={cn(
                     "w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] bg-[#fdffef] text-black flex items-center justify-center text-xl font-bold cursor-pointer",
                     matrix[rowIndex][colIndex] == -1 ? "cursor-default" : "cursor-pointer",
-                    matrix[rowIndex][colIndex] == solution[rowIndex][colIndex] ? "bg-[#fdffef]" : "bg-[#fdffefce]",
-                    item == -1 ? "bg-accent" : "",
-                    "rounded-md select-none hover:scale-105"
+                    matrix[rowIndex][colIndex] == solution[rowIndex][colIndex]
+                      ? "bg-[#fdffef]"
+                      : "bg-[#fdffefce] shadow shadow-white/10",
+                    item == -1 ? "bg-accent" : "hover:scale-103",
+                    "rounded-sm select-none transition-[.1s]"
                   )}
                 >
                   {item == -1 ? "" : item}
