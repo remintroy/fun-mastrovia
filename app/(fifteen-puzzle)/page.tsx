@@ -128,11 +128,12 @@ export default function FifteenPuzzleHome() {
       setMatrix(newMatrix);
       setMoves((moves) => ++moves);
       setCompleted(isCompleted(newMatrix, solution));
-      if (permission.allowAudio) audioRef?.current?.play();
-      if (permission.allowVibrate) navigator?.vibrate?.(5);
-      if (!started) {
-        setStarted(true);
+      if (permission.allowAudio && audioRef?.current) {
+        audioRef.current.muted = false;
+        audioRef.current.play();
       }
+      if (permission.allowVibrate) navigator?.vibrate?.(5);
+      if (!started) setStarted(true);
     } else {
       if (permission.allowVibrate) navigator?.vibrate?.([10, 0, 10]);
     }
@@ -197,7 +198,7 @@ export default function FifteenPuzzleHome() {
 
   return (
     <div className="w-full h-full flex flex-col gap-[10px] items-center justify-center">
-      <audio src="/fifteen-puzzle/bubble.mp3" hidden ref={audioRef} />
+      <audio src="/fifteen-puzzle/bubble.mp3" hidden muted={false} ref={audioRef} />
       <div className="w-[350px] sm:w-[500px] h-[60px] flex justify-between gap-[10px]">
         <div className="border bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md">
           <div>
