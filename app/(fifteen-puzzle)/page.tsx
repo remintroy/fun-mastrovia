@@ -1,8 +1,9 @@
 "use client";
 
 import usePermissions from "@/hooks/usePermissions";
+import useSettingsStore from "@/lib/store/settingsStore";
 import { cn } from "@/lib/utils";
-import { VibrateIcon, Volume2Icon } from "lucide-react";
+import { VibrateIcon, VibrateOff, Volume2Icon, VolumeOff } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const generateCleanMatrix = (size = 4) => {
@@ -120,6 +121,7 @@ export default function FifteenPuzzleHome() {
   const [timeCounter, setTimeCounter] = useState(0);
   const matrixRef = useRef(matrix);
   const permission = usePermissions();
+  const setPermissions = useSettingsStore((state) => state.setPermissions);
 
   const audioContextRef = useRef<AudioContext | null>(null);
   const audioBufferRef = useRef<AudioBuffer | null>(null);
@@ -230,11 +232,17 @@ export default function FifteenPuzzleHome() {
           </div>
         </div>
         <div className="flex gap-[10px]">
-          <div className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer">
-            <VibrateIcon />
+          <div
+            onClick={() => setPermissions("allowVibrate", !permission?.allowVibrate)}
+            className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer"
+          >
+            {permission?.allowVibrate ? <VibrateIcon /> : <VibrateOff />}
           </div>
-          <div className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer">
-            <Volume2Icon />
+          <div
+            onClick={() => setPermissions("allowAudio", !permission?.allowAudio)}
+            className="border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer"
+          >
+            {permission?.allowAudio ? <Volume2Icon /> : <VolumeOff />}
           </div>
         </div>
       </div>
