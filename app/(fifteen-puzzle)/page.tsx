@@ -4,7 +4,7 @@
 import usePermissions from "@/hooks/usePermissions";
 import { cn } from "@/lib/utils";
 import { VibrateIcon, Volume2Icon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const generateCleanMatrix = (size = 4) => {
   const matrix: number[][] = [];
@@ -40,7 +40,13 @@ const isValidMove = (matrix: number[][], x: number, y: number) => {
   const emptyTile = findEmptyTile(matrix);
   if (!emptyTile) return false;
 
-  return (Math.abs(x - emptyTile.x) === 1 && y === emptyTile.y) || (Math.abs(y - emptyTile.y) === 1 && x === emptyTile.x);
+  return (
+    ((Math.abs(x - emptyTile.x) === 1 && y === emptyTile.y) || (Math.abs(y - emptyTile.y) === 1 && x === emptyTile.x)) &&
+    x >= 0 &&
+    x <= matrix.length - 1 &&
+    y >= 0 &&
+    y <= matrix[0].length - 1
+  );
 };
 
 const moveTile = (matrix: number[][], x: number, y: number) => {
@@ -53,6 +59,43 @@ const moveTile = (matrix: number[][], x: number, y: number) => {
   newMatrix[x][y] = -1;
 
   return newMatrix;
+};
+
+const getPossibleMoves = (matrix: number[][]) => {
+  const possibleMoves = {
+    up: { move: { x: 0, y: 0 }, possible: false },
+    down: { move: { x: 0, y: 0 }, possible: false },
+    left: { move: { x: 0, y: 0 }, possible: false },
+    right: { move: { x: 0, y: 0 }, possible: false },
+  };
+
+  const emptyTile = findEmptyTile(matrix);
+  if (!emptyTile) return possibleMoves;
+
+  const size = matrix.length;
+
+  // Check up
+  if (emptyTile.x > 0) {
+    possibleMoves.up.move = { x: emptyTile.x - 1, y: emptyTile.y };
+    possibleMoves.up.possible = true;
+  }
+  // Check down
+  if (emptyTile.x < size - 1) {
+    possibleMoves.down.move = { x: emptyTile.x + 1, y: emptyTile.y };
+    possibleMoves.down.possible = true;
+  }
+  // Check left
+  if (emptyTile.y < 0) {
+    possibleMoves.left.move = { x: emptyTile.x, y: emptyTile.y - 1 };
+    possibleMoves.left.possible = true;
+  }
+  // Check right
+  if (emptyTile.y > size - 1) {
+    possibleMoves.right.move = { x: emptyTile.x, y: emptyTile.y + 1 };
+    possibleMoves.right.possible = true;
+  }
+
+  return possibleMoves;
 };
 
 const shuffleMatrix = (solution: number[][]): number[][] => {
@@ -99,11 +142,12 @@ export default function FifteenPuzzleHome() {
   const [matrix, setMatrix] = useState<number[][]>(solution);
   const [moves, setMoves] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const matrixRef = useRef(matrix);
   // const permission = usePermissions();
   // const audio = useAudio();
 
-  const handleTileClick = (x: number, y: number) => {
-    const newMatrix = moveTile(matrix, x, y);
+  const handleTileMove = (x: number, y: number) => {
+    const newMatrix = moveTile(matrixRef.current, x, y);
     if (newMatrix) {
       // audio.playMoveAudio();
       setMatrix(newMatrix);
@@ -118,9 +162,42 @@ export default function FifteenPuzzleHome() {
     setCompleted(false);
   };
 
+  const handleArrowButtonClick = (direction: "up" | "down" | "left" | "right") => {
+    const emptyTile = findEmptyTile(matrixRef.current);
+    if (!emptyTile) return;
+
+    let { x, y } = { ...emptyTile };
+
+    if (direction === "up") {
+      x -= 1;
+    } else if (direction === "down") {
+      x += 1;
+    } else if (direction === "left") {
+      y -= 1;
+    } else if (direction === "right") {
+      y += 1;
+    }
+
+    handleTileMove(x, y);
+  };
+
   useEffect(() => {
     setMatrix(shuffleMatrix(solution));
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "r" || e.key === "R") handleResetClick();
+      if (e.key === "ArrowUp") handleArrowButtonClick("up");
+      if (e.key === "ArrowDown") handleArrowButtonClick("down");
+      if (e.key === "ArrowLeft") handleArrowButtonClick("left");
+      if (e.key === "ArrowRight") handleArrowButtonClick("right");
+    });
+    return () => {
+      window.removeEventListener("keydown", () => {});
+    };
   }, []);
+
+  useEffect(() => {
+    matrixRef.current = matrix;
+  }, [matrix]);
 
   return (
     <div className="w-full h-full flex flex-col gap-[10px] items-center justify-center">
@@ -151,7 +228,7 @@ export default function FifteenPuzzleHome() {
               return (
                 <div
                   key={item}
-                  onClick={() => handleTileClick(rowIndex, colIndex)}
+                  onClick={() => handleTileMove(rowIndex, colIndex)}
                   className={cn(
                     "w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] bg-[#fdffef] text-black flex items-center justify-center text-xl font-bold cursor-pointer",
                     matrix[rowIndex][colIndex] == -1 ? "cursor-default" : "cursor-pointer",
