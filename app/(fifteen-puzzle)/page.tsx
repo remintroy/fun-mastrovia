@@ -61,43 +61,6 @@ const moveTile = (matrix: number[][], x: number, y: number) => {
   return newMatrix;
 };
 
-const getPossibleMoves = (matrix: number[][]) => {
-  const possibleMoves = {
-    up: { move: { x: 0, y: 0 }, possible: false },
-    down: { move: { x: 0, y: 0 }, possible: false },
-    left: { move: { x: 0, y: 0 }, possible: false },
-    right: { move: { x: 0, y: 0 }, possible: false },
-  };
-
-  const emptyTile = findEmptyTile(matrix);
-  if (!emptyTile) return possibleMoves;
-
-  const size = matrix.length;
-
-  // Check up
-  if (emptyTile.x > 0) {
-    possibleMoves.up.move = { x: emptyTile.x - 1, y: emptyTile.y };
-    possibleMoves.up.possible = true;
-  }
-  // Check down
-  if (emptyTile.x < size - 1) {
-    possibleMoves.down.move = { x: emptyTile.x + 1, y: emptyTile.y };
-    possibleMoves.down.possible = true;
-  }
-  // Check left
-  if (emptyTile.y < 0) {
-    possibleMoves.left.move = { x: emptyTile.x, y: emptyTile.y - 1 };
-    possibleMoves.left.possible = true;
-  }
-  // Check right
-  if (emptyTile.y > size - 1) {
-    possibleMoves.right.move = { x: emptyTile.x, y: emptyTile.y + 1 };
-    possibleMoves.right.possible = true;
-  }
-
-  return possibleMoves;
-};
-
 const shuffleMatrix = (solution: number[][]): number[][] => {
   const size = solution.length;
   const matrix = JSON.parse(JSON.stringify(solution));
