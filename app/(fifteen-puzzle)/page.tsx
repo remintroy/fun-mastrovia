@@ -1,6 +1,5 @@
 "use client";
 
-// import useAudio from "@/hooks/useAudio";
 import usePermissions from "@/hooks/usePermissions";
 import { cn } from "@/lib/utils";
 import { VibrateIcon, Volume2Icon } from "lucide-react";
@@ -100,29 +99,49 @@ const isCompleted = (matrix: number[][], solution: number[][]) => {
 };
 
 const solution = generateCleanMatrix();
+let timer: NodeJS.Timeout;
 
 export default function FifteenPuzzleHome() {
   const [matrix, setMatrix] = useState<number[][]>(solution);
   const [moves, setMoves] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const [started, setStarted] = useState(false);
   const matrixRef = useRef(matrix);
-  // const permission = usePermissions();
-  // const audio = useAudio();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const permission = usePermissions();
+  const [timeCounter, setTimeCounter] = useState(0);
 
   const handleTileMove = (x: number, y: number) => {
     const newMatrix = moveTile(matrixRef.current, x, y);
     if (newMatrix) {
-      // audio.playMoveAudio();
       setMatrix(newMatrix);
       setMoves((moves) => ++moves);
       setCompleted(isCompleted(newMatrix, solution));
+      if (permission.allowAudio) audioRef?.current?.play();
+      if (!started) {
+        setStarted(true);
+      }
     }
   };
+
+  useEffect(() => {
+    if (started && !completed) {
+      timer = setInterval(() => {
+        setTimeCounter((prev) => Number((prev + 0.1).toPrecision(2)));
+      }, 100);
+
+      return () => clearInterval(timer);
+    }
+
+    if (completed) clearInterval(timer);
+  }, [started, completed]);
 
   const handleResetClick = () => {
     setMatrix(shuffleMatrix(solution));
     setMoves(0);
     setCompleted(false);
+    setStarted(false);
+    setTimeCounter(0);
   };
 
   const handleArrowButtonClick = (direction: "up" | "down" | "left" | "right") => {
@@ -164,11 +183,12 @@ export default function FifteenPuzzleHome() {
 
   return (
     <div className="w-full h-full flex flex-col gap-[10px] items-center justify-center">
+      <audio src="/fifteen-puzzle/bubble.mp3" hidden ref={audioRef} />
       <div className="w-[350px] sm:w-[500px] h-[60px] flex justify-between gap-[10px]">
         <div className="border bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md">
           <div>
             <div className="text-gray-300 text-sm">Time</div>
-            <div className="text-xl leading-5">10s</div>
+            <div className="text-xl leading-5">{timeCounter}s</div>
           </div>
           <div>
             <div className="text-gray-300 text-sm">Moves</div>
@@ -197,7 +217,7 @@ export default function FifteenPuzzleHome() {
                     matrix[rowIndex][colIndex] == -1 ? "cursor-default" : "cursor-pointer",
                     matrix[rowIndex][colIndex] == solution[rowIndex][colIndex] ? "bg-[#fdffef]" : "bg-[#fdffefce]",
                     item == -1 ? "bg-accent" : "",
-                    "rounded-md select-none"
+                    "rounded-md select-none hover:scale-105"
                   )}
                 >
                   {item == -1 ? "" : item}
