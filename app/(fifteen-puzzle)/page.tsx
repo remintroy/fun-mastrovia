@@ -4,7 +4,7 @@
 import usePermissions from "@/hooks/usePermissions";
 import { cn } from "@/lib/utils";
 import { VibrateIcon, Volume2Icon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const generateCleanMatrix = (size = 4) => {
   const matrix: number[][] = [];
@@ -96,7 +96,7 @@ const isCompleted = (matrix: number[][], solution: number[][]) => {
 const solution = generateCleanMatrix();
 
 export default function FifteenPuzzleHome() {
-  const [matrix, setMatrix] = useState<number[][]>(shuffleMatrix(solution));
+  const [matrix, setMatrix] = useState<number[][]>(solution);
   const [moves, setMoves] = useState(0);
   const [completed, setCompleted] = useState(false);
   // const permission = usePermissions();
@@ -117,6 +117,10 @@ export default function FifteenPuzzleHome() {
     setMoves(0);
     setCompleted(false);
   };
+
+  useEffect(() => {
+    setMatrix(shuffleMatrix(solution));
+  }, []);
 
   return (
     <div className="w-full h-full flex flex-col gap-[10px] items-center justify-center">
