@@ -134,7 +134,7 @@ export default function FifteenPuzzleHome() {
         setStarted(true);
       }
     } else {
-      if (permission.allowVibrate) navigator?.vibrate?.([10, 10]);
+      if (permission.allowVibrate) navigator?.vibrate?.([10, 0, 10]);
     }
   };
 
