@@ -243,7 +243,7 @@ export default function FifteenPuzzleHome() {
             onClick={() => setPermissions("allowVibrate", !permission?.allowVibrate)}
             className={cn(
               "border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer",
-              permission?.allowVibrate ? "text-green-200" : "text-red-200",
+              permission?.allowVibrate ? "text-white" : "text-red-200",
               isVibrateSupported ? "flex" : "hidden"
             )}
           >
@@ -254,7 +254,7 @@ export default function FifteenPuzzleHome() {
             onClick={() => setPermissions("allowAudio", !permission?.allowAudio)}
             className={cn(
               "border items-center justify-center bg-black/30 backdrop-blur-xs w-min h-full p-2 px-4 flex gap-[20px] rounded-md select-none cursor-pointer",
-              permission?.allowAudio ? "text-green-200" : "text-red-200"
+              permission?.allowAudio ? "text-white" : "text-red-200"
             )}
           >
             {permission?.allowAudio ? <Volume2Icon /> : <VolumeOff />}
