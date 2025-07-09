@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fifteen Puzzle",
-  description: "Simple and interactive fifteen puzzle game.",
+  title: "Mastrovia fun hub",
+  description: "A collection of fun and interactive games.",
   manifest: "/manifest.json",
 };
 

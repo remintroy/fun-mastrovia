@@ -2,6 +2,32 @@ import { cn } from "@/lib/utils";
 import styles from "./style.module.css";
 import Image from "next/image";
 import mastroviaLogo from "./assets/mastrovia-logo.png";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Fifteen Puzzle",
+  description: "Simple and interactive fifteen puzzle game.",
+  openGraph: {
+    type: "website",
+    url: "https://game.mastrovia.com/",
+    title: "Fifteen Puzzle",
+    description: "Simple and interactive fifteen puzzle game.",
+    images: [
+      {
+        url: "https://game.mastrovia.com/images/fifteen-puzzle-banner.png",
+        width: 1920,
+        height: 1024,
+        alt: "Fifteen Puzzle Thumbnail",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fifteen Puzzle",
+    description: "Simple and interactive fifteen puzzle game.",
+    images: ["https://game.mastrovia.com/images/fifteen-puzzle-banner.png"],
+  },
+};
 
 export default function FifteenPuzzleGameLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
