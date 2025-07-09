@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import styles from "./style.module.css";
 import Image from "next/image";
-import mastroviaLogo from "./assets/mastrovia-logo.png";
+import mastroviaLogo from "./assets/mastrovia-logo.webp";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
