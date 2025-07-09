@@ -16,7 +16,7 @@ export default function FifteenPuzzleGameLayout({ children }: Readonly<{ childre
       <div className="bg-[url('/textures/grains.png')] absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.08]" />
       <div className="absolute top-0 left-0 h-16 border-b w-full flex items-center justify-center">Fifteen Puzzle</div>
       <main className="absolute w-full top-16 bottom-10">{children}</main>
-      <div className="absolute flex justify-center py-2 bottom-0 left-0 w-full border-t bg-black/25 backdrop-blur-sm">
+      <div className="absolute flex justify-center py-2 bottom-0 left-0 w-full border-t">
         <div className="text-gray-400">
           Powered by{" "}
           <a href="https://mastrovia.com/" className="underline" target="_blank">
