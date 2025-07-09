@@ -133,20 +133,24 @@ export default function FifteenPuzzleHome() {
   const audioContextRef = useRef<AudioContext | null>(null);
   const audioBufferRef = useRef<AudioBuffer | null>(null);
 
+  const initAudio = async () => {
+    if (!audioContextRef.current) {
+      const AudioContextClass = window.AudioContext || (window as any)?.webkitAudioContext;
+      audioContextRef.current = new AudioContextClass();
+    }
+
+    const res = await fetch("/fifteen-puzzle/audio/bubble.mp3");
+    const arrayBuffer = await res.arrayBuffer();
+    const audioBuffer = await audioContextRef.current.decodeAudioData(arrayBuffer);
+    audioBufferRef.current = audioBuffer;
+  };
+
   useEffect(() => {
-    const initAudio = async () => {
-      if (!audioContextRef.current) {
-        const AudioContextClass = window.AudioContext || (window as any)?.webkitAudioContext;
-        audioContextRef.current = new AudioContextClass();
-      }
+    window.addEventListener("click", initAudio, { once: true });
 
-      const res = await fetch("/fifteen-puzzle/audio/bubble.mp3");
-      const arrayBuffer = await res.arrayBuffer();
-      const audioBuffer = await audioContextRef.current.decodeAudioData(arrayBuffer);
-      audioBufferRef.current = audioBuffer;
+    return () => {
+      removeEventListener("click", () => {});
     };
-
-    initAudio();
   }, []);
 
   const handleTileMove = (x: number, y: number) => {
