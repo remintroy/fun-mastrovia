@@ -37,6 +37,7 @@ export default function FifteenPuzzleGameLayout({ children }: Readonly<{ childre
         alt="Mastroiva Logo"
         src={mastroviaLogo}
         className="absolute left-[50%] translate-x-[-50%] top-[80px] opacity-10 px-20 lg:px-0"
+        priority
       />
       <div className="bg-radial from-[#0000001e] to-[#000000] absolute top-0 left-0 w-full h-full" />
       <div className="bg-[url('/textures/grains.png')] absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.08]" />
