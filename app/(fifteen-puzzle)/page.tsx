@@ -270,16 +270,17 @@ export default function FifteenPuzzleHome() {
                   key={item}
                   onClick={() => handleTileMove(rowIndex, colIndex)}
                   className={cn(
-                    "w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] bg-[#fdffef] text-black flex items-center justify-center text-xl font-bold cursor-pointer",
-                    matrix[rowIndex][colIndex] == -1 ? "cursor-default" : "cursor-pointer",
-                    matrix[rowIndex][colIndex] == solution[rowIndex][colIndex]
-                      ? "bg-[#fdffef]"
-                      : "bg-[#fdffefce] shadow shadow-white/10",
-                    item == -1 ? "bg-accent" : "hover:scale-103",
-                    "rounded-sm select-none transition-[.1s]"
+                    "relative group w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] text-black flex items-center justify-center text-xl font-bold rounded-sm select-none overflow-hidden transition-transform duration-300",
+                    matrix[rowIndex][colIndex] == -1 ? "cursor-default bg-accent" : "cursor-pointer bg-[#fdffef]",
+                    matrix[rowIndex][colIndex] != -1 && matrix[rowIndex][colIndex] != solution[rowIndex][colIndex] && "bg-[#fdffefce]",
+                    item != -1 && "hover:scale-103"
                   )}
                 >
-                  {item == -1 ? "" : item}
+                  {item != -1 && (
+                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                  )}
+
+                  <div className="relative z-10">{item == -1 ? "" : item}</div>
                 </div>
               );
             });
