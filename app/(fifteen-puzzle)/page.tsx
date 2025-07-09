@@ -146,11 +146,7 @@ export default function FifteenPuzzleHome() {
   };
 
   useEffect(() => {
-    window.addEventListener("click", initAudio, { once: true });
-
-    return () => {
-      removeEventListener("click", () => {});
-    };
+    initAudio();
   }, []);
 
   const handleTileMove = (x: number, y: number) => {
