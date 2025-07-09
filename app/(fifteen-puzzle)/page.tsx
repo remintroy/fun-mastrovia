@@ -270,10 +270,10 @@ export default function FifteenPuzzleHome() {
                   key={item}
                   onClick={() => handleTileMove(rowIndex, colIndex)}
                   className={cn(
-                    "relative group w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] text-black flex items-center justify-center text-xl font-bold rounded-sm select-none overflow-hidden transition-transform duration-300",
+                    "relative group w-[72px] sm:w-[105px] h-[72px] sm:h-[105px] text-black flex items-center justify-center text-xl font-bold rounded-sm select-none overflow-hidden",
                     matrix[rowIndex][colIndex] == -1 ? "cursor-default bg-accent" : "cursor-pointer bg-[#fdffef]",
-                    matrix[rowIndex][colIndex] != -1 && matrix[rowIndex][colIndex] != solution[rowIndex][colIndex] && "bg-[#fdffefce]",
-                    item != -1 && "hover:scale-103"
+                    matrix[rowIndex][colIndex] != -1 && matrix[rowIndex][colIndex] != solution[rowIndex][colIndex] && "bg-[#fdffefce]"
+                    // item != -1 && "hover:scale-103 transition-transform duration-100"
                   )}
                 >
                   {item != -1 && (
