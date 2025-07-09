@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description: "Simple and interactive fifteen puzzle game.",
     images: [
       {
-        url: "https://game.mastrovia.com/images/fifteen-puzzle-banner.png",
+        url: "https://game.mastrovia.com/fifteen-puzzle/images/fifteen-puzzle-banner.png",
         width: 1920,
         height: 1024,
         alt: "Fifteen Puzzle Thumbnail",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fifteen Puzzle",
     description: "Simple and interactive fifteen puzzle game.",
-    images: ["https://game.mastrovia.com/images/fifteen-puzzle-banner.png"],
+    images: ["https://game.mastrovia.com/fifteen-puzzle/images/fifteen-puzzle-banner.png"],
   },
 };
 
