@@ -140,7 +140,7 @@ export default function FifteenPuzzleHome() {
         audioContextRef.current = new AudioContextClass();
       }
 
-      const res = await fetch("/fifteen-puzzle/bubble.mp3");
+      const res = await fetch("/fifteen-puzzle/audio/bubble.mp3");
       const arrayBuffer = await res.arrayBuffer();
       const audioBuffer = await audioContextRef.current.decodeAudioData(arrayBuffer);
       audioBufferRef.current = audioBuffer;
