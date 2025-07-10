@@ -4,6 +4,7 @@ import usePermissions from "@/hooks/usePermissions";
 import useSettingsStore from "@/lib/store/settingsStore";
 import { cn } from "@/lib/utils";
 import { VibrateIcon, VibrateOff, Volume2Icon, VolumeOff } from "lucide-react";
+import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 
 const generateCleanMatrix = (size = 4) => {
@@ -123,6 +124,7 @@ export default function FifteenPuzzleHome() {
   const permission = usePermissions();
   const setPermissions = useSettingsStore((state) => state.setPermissions);
   const [isVibrateSupported, setIsVibrateSupported] = useState(false);
+  const { setTheme } = useTheme();
 
   useEffect(() => {
     if (typeof navigator !== "undefined" && "vibrate" in navigator) {
@@ -147,6 +149,7 @@ export default function FifteenPuzzleHome() {
 
   useEffect(() => {
     initAudio();
+    setTheme("dark");
   }, []);
 
   const handleTileMove = (x: number, y: number) => {
