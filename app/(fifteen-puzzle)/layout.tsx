@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import styles from "./style.module.css";
 import Image from "next/image";
-import mastroviaLogo from "./assets/mastrovia-logo.webp";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -35,7 +34,9 @@ export default function FifteenPuzzleGameLayout({ children }: Readonly<{ childre
       <div className={cn("w-full h-full absolute left-0 right-0", styles["bg-grid"])} />
       <Image
         alt="Mastroiva Logo"
-        src={mastroviaLogo}
+        src={"/mastrovia-logo.webp"}
+        width={918}
+        height={499}
         className="absolute left-[50%] translate-x-[-50%] top-[80px] opacity-10 px-20 lg:px-0"
         priority
       />
