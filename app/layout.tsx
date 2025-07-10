@@ -20,10 +20,6 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
-export const appConfig = {
-  baseUrl: "https://fun.mastrovia.com",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{

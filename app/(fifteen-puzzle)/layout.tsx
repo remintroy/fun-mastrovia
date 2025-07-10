@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import styles from "./style.module.css";
 import Image from "next/image";
 import { Metadata } from "next";
-import { appConfig } from "../layout";
+import { appConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Fifteen Puzzle",
