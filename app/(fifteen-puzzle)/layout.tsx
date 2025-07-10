@@ -2,18 +2,19 @@ import { cn } from "@/lib/utils";
 import styles from "./style.module.css";
 import Image from "next/image";
 import { Metadata } from "next";
+import { appConfig } from "../layout";
 
 export const metadata: Metadata = {
   title: "Fifteen Puzzle",
   description: "Simple and interactive fifteen puzzle game.",
   openGraph: {
     type: "website",
-    url: "https://game.mastrovia.com/",
+    url: `${appConfig.baseUrl}`,
     title: "Fifteen Puzzle",
     description: "Simple and interactive fifteen puzzle game.",
     images: [
       {
-        url: "https://game.mastrovia.com/fifteen-puzzle/images/fifteen-puzzle-banner.png",
+        url: `${appConfig.baseUrl}/fifteen-puzzle/images/fifteen-puzzle-banner.png`,
         width: 1920,
         height: 1024,
         alt: "Fifteen Puzzle Thumbnail",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fifteen Puzzle",
     description: "Simple and interactive fifteen puzzle game.",
-    images: ["https://game.mastrovia.com/fifteen-puzzle/images/fifteen-puzzle-banner.png"],
+    images: [`${appConfig.baseUrl}/fifteen-puzzle/images/fifteen-puzzle-banner.png`],
   },
 };
 
@@ -48,7 +49,7 @@ export default function FifteenPuzzleGameLayout({ children }: Readonly<{ childre
       <div className="absolute flex justify-center py-2 bottom-0 left-0 w-full border-t">
         <div className="text-gray-400">
           Powered by{" "}
-          <a href="https://mastrovia.com/" className="underline" target="_blank">
+          <a href="https://mastrovia.com" className="underline" target="_blank">
             Mastrovia
           </a>
         </div>
