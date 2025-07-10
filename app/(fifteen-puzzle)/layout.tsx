@@ -31,6 +31,7 @@ export const metadata: Metadata = {
 export default function FifteenPuzzleGameLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={cn("relative h-dvh", styles.inconsolata)}>
+      {/* TODO: Make this website adaptive with light theme */}
       <div className={cn("w-full h-full absolute left-0 right-0", styles["bg-grid"])} />
       <Image
         alt="Mastroiva Logo"
