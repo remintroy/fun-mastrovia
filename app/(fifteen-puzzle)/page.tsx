@@ -190,6 +190,7 @@ export default function FifteenPuzzleHome() {
     setCompleted(false);
     setStarted(false);
     setTimeCounter(0);
+    event({ action: "game_restart", category: "fifteen-puzzle", label: "Restart" });
   };
 
   const handleArrowButtonClick = (direction: "up" | "down" | "left" | "right") => {
