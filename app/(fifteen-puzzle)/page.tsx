@@ -2,7 +2,7 @@
 
 import usePermissions from "@/hooks/usePermissions";
 import useSettingsStore from "@/lib/store/settingsStore";
-import { cn } from "@/lib/utils";
+import { cn, event } from "@/lib/utils";
 import { VibrateIcon, VibrateOff, Volume2Icon, VolumeOff } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
@@ -173,14 +173,15 @@ export default function FifteenPuzzleHome() {
 
   useEffect(() => {
     if (started && !completed) {
-      timer = setInterval(() => {
-        setTimeCounter((prev) => Number(prev) + 0.1);
-      }, 100);
-
+      timer = setInterval(() => setTimeCounter((prev) => Number(prev) + 0.1), 100);
+      event({ action: "game_start", category: "fifteen-puzzle", label: "Start" });
       return () => clearInterval(timer);
     }
 
-    if (completed) clearInterval(timer);
+    if (completed) {
+      clearInterval(timer);
+      event({ action: "game_end", category: "fifteen-puzzle", label: "End" });
+    }
   }, [started, completed]);
 
   const handleResetClick = () => {
