@@ -121,6 +121,7 @@ export default function FifteenPuzzleHome() {
   const [started, setStarted] = useState(false);
   const [timeCounter, setTimeCounter] = useState(0);
   const matrixRef = useRef(matrix);
+  const isCompletedRef = useRef(completed);
   const permission = usePermissions();
   const setPermissions = useSettingsStore((state) => state.setPermissions);
   const [isVibrateSupported, setIsVibrateSupported] = useState(false);
@@ -153,6 +154,7 @@ export default function FifteenPuzzleHome() {
   }, []);
 
   const handleTileMove = (x: number, y: number) => {
+    if (isCompletedRef.current) return;
     const newMatrix = moveTile(matrixRef.current, x, y);
     if (newMatrix) {
       setMatrix(newMatrix);
@@ -172,6 +174,9 @@ export default function FifteenPuzzleHome() {
   };
 
   useEffect(() => {
+    if (completed) isCompletedRef.current = true;
+    else isCompletedRef.current = false;
+
     if (started && !completed) {
       timer = setInterval(() => setTimeCounter((prev) => Number(prev) + 0.1), 100);
       event({ action: "game_start", category: "fifteen-puzzle", label: "Start" });
