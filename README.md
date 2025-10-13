@@ -1,3 +1,3 @@
 # Fifteen puzzle
 
-Simple and interactive fifteen puzzle game.
+Simple and interactive fifteen puzzle game. 
