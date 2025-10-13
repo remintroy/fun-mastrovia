@@ -1,3 +1,3 @@
-# Fifteen puzzle
+# Fun hub - mastrovia.com
 
-Simple and interactive fifteen puzzle game. 
+Simple and interactive games. 
