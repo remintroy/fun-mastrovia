@@ -1,7 +1,9 @@
 import { cn } from "@/lib/utils";
-import styles from "./style.module.css";
+
+import Link from "next/link";
 import Image from "next/image";
-import { Metadata } from "next";
+import { MoveLeft } from "lucide-react";
+import type { Metadata } from "next";
 import { appConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -31,9 +33,9 @@ export const metadata: Metadata = {
 
 export default function FifteenPuzzleGameLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={cn("relative h-dvh", styles.inconsolata)}>
+    <div className={cn("relative h-dvh", "inconsolata")}>
       {/* TODO: Make this website adaptive with light theme */}
-      <div className={cn("w-full h-full absolute left-0 right-0", styles["bg-grid"])} />
+      <div className={cn("w-full h-full absolute left-0 right-0", "bg-grid")} />
       <Image
         alt="Mastroiva Logo"
         src={"/mastrovia-logo.webp"}
@@ -42,15 +44,29 @@ export default function FifteenPuzzleGameLayout({ children }: Readonly<{ childre
         className="absolute left-[50%] translate-x-[-50%] top-[80px] opacity-10 px-20 lg:px-0"
         priority
       />
-      <div className="bg-radial from-[#0000001e] to-[#000000] absolute top-0 left-0 w-full h-full" />
+      <div className="bg-radial from-background/40 to-background absolute top-0 left-0 w-full h-full" />
       <div className="bg-[url('/textures/grains.png')] absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.08]" />
-      <div className="absolute top-0 left-0 h-16 border-b w-full flex items-center justify-center">Fifteen Puzzle</div>
+      <div className="absolute top-0 left-0 h-16 border-b w-full flex items-center justify-between px-6 backdrop-blur-md z-50">
+        <Link
+          href="/"
+          className="flex items-center gap-3 text-base font-medium text-muted-foreground hover:text-foreground transition-colors group"
+        >
+          <MoveLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
+          Back to Hub
+        </Link>
+        <div className="font-semibold tracking-wider uppercase text-xs text-gray-400">Fifteen Puzzle</div>
+        <div className="w-20" /> {/* Spacer */}
+      </div>
       <main className="absolute w-full top-16 bottom-10">{children}</main>
-      <div className="absolute flex justify-center py-2 bottom-0 left-0 w-full border-t">
-        <div className="text-gray-400">
-          Powered by{" "}
-          <a href="https://mastrovia.com" className="underline" target="_blank">
-            Mastrovia
+      <div className="absolute flex justify-center py-6 bottom-0 left-0 w-full border-t border-border/40 bg-background/20 backdrop-blur-sm">
+        <div className="text-sm text-muted-foreground uppercase tracking-[0.2em] font-bold">
+          Developed by{" "}
+          <a
+            href="https://mastrovia.com"
+            className="text-foreground hover:text-primary transition-colors underline decoration-border underline-offset-4"
+            target="_blank"
+          >
+            Mastrovia Studio
           </a>
         </div>
       </div>
