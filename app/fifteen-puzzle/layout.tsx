@@ -46,7 +46,7 @@ export default function FifteenPuzzleGameLayout({ children }: Readonly<{ childre
       />
       <div className="bg-radial from-background/40 to-background absolute top-0 left-0 w-full h-full" />
       <div className="bg-[url('/textures/grains.png')] absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.08]" />
-      <div className="absolute top-0 left-0 h-16 border-b w-full flex items-center justify-between px-6 backdrop-blur-md z-50">
+      <div className="absolute top-0 left-0 h-16 border-b w-full flex items-center justify-between px-6 backdrop-blur-md z-50 bg-background/40">
         <Link
           href="/"
           className="flex items-center gap-1.5 sm:gap-3 text-xs sm:text-base font-medium text-muted-foreground hover:text-foreground transition-colors group"
@@ -56,10 +56,18 @@ export default function FifteenPuzzleGameLayout({ children }: Readonly<{ childre
             Back<span className="hidden sm:inline"> to Hub</span>
           </span>
         </Link>
-        <div className="absolute left-1/2 -translate-x-1/2 font-semibold tracking-wider uppercase text-muted-foreground/60 whitespace-nowrap">
+        <div className="absolute left-1/2 -translate-x-1/2 font-semibold tracking-wider uppercase text-muted-foreground/70 whitespace-nowrap text-[12px] sm:text-lg">
           Fifteen Puzzle
         </div>
-        <div className="w-10 sm:w-20" /> {/* Spacer */}
+        <div className="flex items-center gap-3">
+          <Image
+            src="/mastrovia-logo.webp"
+            alt="Mastrovia Logo"
+            width={24}
+            height={24}
+            className="object-contain opacity-70 group-hover:opacity-100 transition-opacity"
+          />
+        </div>
       </div>
 
       <main className="absolute w-full top-16 bottom-10 sm:bottom-20 overflow-y-auto">{children}</main>

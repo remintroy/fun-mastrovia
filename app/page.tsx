@@ -21,23 +21,29 @@ const games = [
 
 export default function LandingPage() {
   return (
-    <div className="relative min-h-screen bg-background text-foreground selection:bg-primary/10 font-sans overflow-x-hidden">
+    <div className="relative min-h-screen bg-background text-foreground selection:bg-primary/10 font-sans">
       {/* Zen Laboratory Background */}
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-20%,hsl(var(--muted)),transparent)]" />
       <div className="fixed inset-0 -z-10 bg-grid opacity-[0.05] pointer-events-none" />
       <div className="fixed inset-0 -z-10 bg-[url('/textures/grains.png')] opacity-[0.02] pointer-events-none" />
 
       {/* Minimal Nav */}
-      <nav className="border-b border-border/40 backdrop-blur-sm sticky top-0 z-50">
+      <nav className="border-b border-border/40 backdrop-blur-md fixed top-0 left-0 right-0 z-50 bg-background/80">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded bg-foreground flex items-center justify-center">
-              <span className="text-background font-black text-sm">M</span>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative w-8 h-8 flex items-center justify-center overflow-hidden">
+              <Image
+                src="/mastrovia-logo.webp"
+                alt="Mastrovia Logo"
+                width={32}
+                height={32}
+                className="object-contain transition-transform group-hover:scale-110"
+              />
             </div>
-            <span className="font-bold tracking-tight text-lg">
-              Mastrovia <span className="text-muted-foreground">Lab</span>
+            <span className="font-bold tracking-tight text-lg uppercase">
+              Mastrovia <span className="text-muted-foreground/40 font-light italic">Lab</span>
             </span>
-          </div>
+          </Link>
           <div className="flex items-center gap-6">
             <Link
               href="https://github.com/mastrovia"
@@ -50,40 +56,54 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <header className="relative pt-20 pb-12 px-6 lg:pt-32 lg:pb-24 overflow-hidden">
-        <div className="container mx-auto max-w-4xl text-center">
-          <Badge
-            variant="outline"
-            className="mb-8 px-4 py-1 border-border/40 text-muted-foreground bg-accent/10 backdrop-blur-sm animate-in fade-in slide-in-from-bottom-3 duration-1000"
-          >
-            <Code2 className="w-3 h-3 mr-2" />
-            Open Source Game Lab
-          </Badge>
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-[ -0.05em] mb-10 bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/40 animate-in fade-in slide-in-from-bottom-4 duration-1000 fill-mode-both leading-[0.9]">
-            RESEARCH. <br />
-            <span className="italic font-light opacity-40">EXPERIMENT.</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-base md:text-lg text-muted-foreground/80 mb-12 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200 fill-mode-both leading-relaxed font-light tracking-wide uppercase">
-            A minimalist sanctuary for interactive logic. <br className="hidden md:block" />
-            built with absolute precision for the curious few.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300 fill-mode-both">
-            <Button
-              size="lg"
-              asChild
-              className="rounded-none px-10 bg-foreground text-background hover:bg-foreground/90"
-            >
-              <Link href="#games">Enter Hub</Link>
-            </Button>
-            <Button
-              size="lg"
+      <header className="relative pt-24 pb-16 px-6 lg:pt-40 lg:pb-32 overflow-hidden">
+        <div className="scanline" />
+        <div className="container mx-auto max-w-5xl relative">
+          {/* Decorative Lab Elements */}
+          <div className="absolute -top-10 left-0 text-[10px] font-mono text-muted-foreground/40 uppercase tracking-[0.5em] hidden lg:block">
+            // research_division
+          </div>
+
+          <div className="flex flex-col items-center text-center">
+            <Badge
               variant="outline"
-              className="rounded-none px-10 border-border/40 hover:bg-foreground hover:text-background transition-all"
+              className="mb-10 px-4 py-1.5 border-primary/20 text-primary bg-primary/5 backdrop-blur-sm animate-in fade-in slide-in-from-bottom-3 duration-1000 rounded-none font-bold uppercase tracking-widest text-[10px]"
             >
-              <Link href="https://mastrovia.com" target="_blank">
-                The Studio
-              </Link>
-            </Button>
+              <Terminal className="w-3 h-3 mr-2" />
+              LABORATORY_ACCESS_GRANTED
+            </Badge>
+
+            <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black tracking-[-0.04em] mb-12 leading-[0.85] animate-in fade-in slide-in-from-bottom-4 duration-1000 fill-mode-both">
+              PURE LOGIC. <br />
+              <span className="italic font-light text-muted-foreground/30 tracking-tight">SERIOUS FUN.</span>
+            </h1>
+
+            <p className="max-w-xl mx-auto text-xs md:text-sm text-muted-foreground/80 mb-16 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200 fill-mode-both leading-relaxed tracking-[0.2em] uppercase font-bold">
+              A digital sanctuary for minimalist experiments. <br className="hidden md:block" />
+              Interactive and built for the pure joy of the solve.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300 fill-mode-both">
+              <Button
+                size="lg"
+                asChild
+                className="rounded-none h-14 px-12 bg-foreground text-background hover:bg-foreground/90 text-xs font-black uppercase tracking-[0.3em] transition-all group"
+              >
+                <Link href="#games" className="flex items-center gap-3">
+                  Access Protocol
+                  <MoveRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                </Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="rounded-none h-14 px-12 border-border/40 hover:bg-foreground hover:text-foreground text-xs font-black uppercase tracking-[0.3em] transition-all"
+              >
+                <Link href="https://mastrovia.com" target="_blank">
+                  The Studio
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -105,7 +125,7 @@ export default function LandingPage() {
               </p>
             </div>
             <div className="hidden md:block">
-              <div className="flex items-center gap-4 text-[10px] font-mono text-muted-foreground/30 uppercase tracking-widest">
+              <div className="flex items-center gap-4 text-[10px] font-mono text-muted-foreground/50 uppercase tracking-widest">
                 <span>Index_Verified</span>
                 <div className="w-12 h-px bg-border/40" />
                 <span>v1.5.0</span>
@@ -125,7 +145,7 @@ export default function LandingPage() {
                           {String(idx + 1).padStart(2, "0")}
                         </span>
                         <div className="flex flex-col">
-                          <span className="text-[10px] font-mono text-muted-foreground/40 uppercase tracking-widest">
+                          <span className="text-[10px] font-mono text-muted-foreground/60 uppercase tracking-widest">
                             Project_ID
                           </span>
                           <span className="text-sm font-bold uppercase tracking-tight">{game.id}</span>
@@ -134,7 +154,7 @@ export default function LandingPage() {
 
                       <div className="space-y-4">
                         <div className="flex items-center justify-between py-2 border-b border-border/40">
-                          <span className="text-[10px] font-mono text-muted-foreground/40 uppercase">Status</span>
+                          <span className="text-[10px] font-mono text-muted-foreground/60 uppercase">Status</span>
                           <Badge
                             variant="outline"
                             className="rounded-none text-[9px] font-bold border-foreground/20 text-foreground"
@@ -143,11 +163,11 @@ export default function LandingPage() {
                           </Badge>
                         </div>
                         <div className="flex items-center justify-between py-2 border-b border-border/40">
-                          <span className="text-[10px] font-mono text-muted-foreground/40 uppercase">Complexity</span>
+                          <span className="text-[10px] font-mono text-muted-foreground/60 uppercase">Complexity</span>
                           <span className="text-[11px] font-bold uppercase">{game.difficulty}</span>
                         </div>
                         <div className="flex items-center justify-between py-2 border-b border-border/40">
-                          <span className="text-[10px] font-mono text-muted-foreground/40 uppercase">Stack</span>
+                          <span className="text-[10px] font-mono text-muted-foreground/60 uppercase">Stack</span>
                           <span className="text-[11px] font-bold uppercase italic">{game.stack}</span>
                         </div>
                       </div>
@@ -239,63 +259,63 @@ export default function LandingPage() {
               </Badge>
               <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-8 max-w-[300px]">
                 Laboratory <br />
-                <span className="italic font-light opacity-50">Ethos</span>
+                <span className="italic font-light opacity-70">Ethos</span>
               </h2>
               <div className="h-px w-20 bg-foreground/20" />
             </div>
 
             <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
               <div className="group">
-                <div className="text-[10px] font-mono text-muted-foreground/40 mb-4 tracking-[0.3em] uppercase">
+                <div className="text-[10px] font-mono text-muted-foreground/60 mb-4 tracking-[0.3em] uppercase">
                   // protocol_01
                 </div>
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
                   <span className="w-2 h-2 rounded-full bg-foreground" />
                   Simple
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
+                <p className="text-muted-foreground/90 text-sm leading-relaxed max-w-sm">
                   Just the essentials. We stripped away the bloat so you can jump straight into the experience without
                   any distractions or complex setup.
                 </p>
               </div>
 
               <div className="group">
-                <div className="text-[10px] font-mono text-muted-foreground/40 mb-4 tracking-[0.3em] uppercase">
+                <div className="text-[10px] font-mono text-muted-foreground/60 mb-4 tracking-[0.3em] uppercase">
                   // protocol_02
                 </div>
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
                   <span className="w-2 h-2 rounded-full bg-foreground" />
                   Interactive
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
+                <p className="text-muted-foreground/90 text-sm leading-relaxed max-w-sm">
                   A digital playground for the curious. Everything here is meant to be touched, clicked, and tested—feel
                   free to explore every corner of the lab.
                 </p>
               </div>
 
               <div className="group">
-                <div className="text-[10px] font-mono text-muted-foreground/40 mb-4 tracking-[0.3em] uppercase">
+                <div className="text-[10px] font-mono text-muted-foreground/60 mb-4 tracking-[0.3em] uppercase">
                   // protocol_03
                 </div>
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
                   <span className="w-2 h-2 rounded-full bg-foreground" />
                   Fun
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
+                <p className="text-muted-foreground/90 text-sm leading-relaxed max-w-sm">
                   Built purely for the joy of it. No ulterior motives, no tracking—just the raw satisfaction of a solved
                   sequence and a brief moment of fun.
                 </p>
               </div>
 
               <div className="group">
-                <div className="text-[10px] font-mono text-muted-foreground/40 mb-4 tracking-[0.3em] uppercase">
+                <div className="text-[10px] font-mono text-muted-foreground/60 mb-4 tracking-[0.3em] uppercase">
                   // protocol_04
                 </div>
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
                   <span className="w-2 h-2 rounded-full bg-foreground" />
                   Open Source
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
+                <p className="text-muted-foreground/90 text-sm leading-relaxed max-w-sm">
                   Power to the community. Developed as a free gift to the open-source world. Our lab is your lab—feel
                   free to fork, hack, and improve together.
                 </p>
@@ -314,7 +334,7 @@ export default function LandingPage() {
             </div>
             <span className="text-sm font-bold tracking-tight text-muted-foreground uppercase">Mastrovia Hub</span>
           </div>
-          <div className="text-[12px] text-muted-foreground/40 flex gap-8">
+          <div className="text-[12px] text-muted-foreground/60 flex gap-8">
             <Link
               href="https://github.com/mastrovia"
               className="hover:text-foreground transition-colors uppercase tracking-widest"

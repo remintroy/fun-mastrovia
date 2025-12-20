@@ -247,7 +247,7 @@ export default function FifteenPuzzleHome() {
         <div className="max-w-lg mx-auto h-14 px-6 flex items-center justify-between shrink-0">
           <div className="flex items-center">
             <div className="flex flex-col justify-center min-w-[70px]">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60 font-bold leading-none mb-1">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70 font-bold leading-none mb-1">
                 Time
               </span>
               <span className="text-xl font-mono leading-none tracking-tighter tabular-nums text-foreground/90">
@@ -256,7 +256,7 @@ export default function FifteenPuzzleHome() {
             </div>
             <div className="w-px h-6 bg-border/20" />
             <div className="flex flex-col justify-center min-w-[60px]">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60 font-bold leading-none mb-1">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70 font-bold leading-none mb-1">
                 Moves
               </span>
               <span className="text-xl font-mono leading-none tracking-tighter tabular-nums text-foreground/90">
@@ -276,7 +276,7 @@ export default function FifteenPuzzleHome() {
                       onClick={() => setPermissions("allowVibrate", !permission?.allowVibrate)}
                       className={cn(
                         "w-10 h-10 transition-all",
-                        permission?.allowVibrate ? "text-foreground bg-accent/10" : "text-muted-foreground/40"
+                        permission?.allowVibrate ? "text-foreground bg-accent/10" : "text-muted-foreground/70"
                       )}
                     >
                       {permission?.allowVibrate ? (
@@ -300,7 +300,7 @@ export default function FifteenPuzzleHome() {
                     onClick={() => setPermissions("allowAudio", !permission?.allowAudio)}
                     className={cn(
                       "w-10 h-10 transition-all",
-                      permission?.allowAudio ? "text-foreground bg-accent/10" : "text-muted-foreground/40"
+                      permission?.allowAudio ? "text-foreground bg-accent/10" : "text-muted-foreground/70"
                     )}
                   >
                     {permission?.allowAudio ? <Volume2Icon className="size-5" /> : <VolumeOff className="size-5" />}
