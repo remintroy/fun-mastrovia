@@ -241,151 +241,157 @@ export default function FifteenPuzzleHome() {
   }, [matrix]);
 
   return (
-    <div className="w-full h-full flex flex-col gap-6 items-center justify-center p-4">
-      <div className="w-full max-w-[350px] sm:max-w-[500px] flex justify-between items-center gap-4">
-        <Card className="bg-card/60 backdrop-blur-xl border-border/50 text-card-foreground shadow-2xl py-4">
-          <CardContent className="p-0 flex items-center px-6 gap-1">
-            <div className="flex flex-col justify-center min-w-[75px]">
-              <span className="text-sm uppercase tracking-widest text-muted-foreground font-bold leading-none mb-1">
+    <div className="w-full h-full flex flex-col">
+      {/* Universal Game Toolbar */}
+      <div className="w-full border-b border-border/40 bg-background/50 backdrop-blur-md">
+        <div className="max-w-lg mx-auto h-14 px-6 flex items-center justify-between shrink-0">
+          <div className="flex items-center">
+            <div className="flex flex-col justify-center min-w-[70px]">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60 font-bold leading-none mb-1">
                 Time
               </span>
-              <span className="font-mono leading-none tracking-tighter tabular-nums">{formatTime(timeCounter)}</span>
+              <span className="text-xl font-mono leading-none tracking-tighter tabular-nums text-foreground/90">
+                {formatTime(timeCounter)}
+              </span>
             </div>
-            <div className="w-px h-6 bg-border/50" />
-            <div className="flex flex-col justify-center text-right min-w-[60px]">
-              <span className="text-sm uppercase tracking-widest text-muted-foreground font-bold leading-none mb-1">
+            <div className="w-px h-6 bg-border/20" />
+            <div className="flex flex-col justify-center min-w-[60px]">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60 font-bold leading-none mb-1">
                 Moves
               </span>
-              <span className="font-mono leading-none tracking-tighter tabular-nums">{moves}</span>
+              <span className="text-xl font-mono leading-none tracking-tighter tabular-nums text-foreground/90">
+                {moves}
+              </span>
             </div>
-          </CardContent>
-        </Card>
+          </div>
 
-        <div className="flex gap-3">
-          <TooltipProvider delayDuration={0}>
-            {isVibrateSupported && (
+          <div className="flex items-center gap-2">
+            <TooltipProvider delayDuration={0}>
+              {isVibrateSupported && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setPermissions("allowVibrate", !permission?.allowVibrate)}
+                      className={cn(
+                        "w-10 h-10 transition-all",
+                        permission?.allowVibrate ? "text-foreground bg-accent/10" : "text-muted-foreground/40"
+                      )}
+                    >
+                      {permission?.allowVibrate ? (
+                        <VibrateIcon className="size-5" />
+                      ) : (
+                        <VibrateOff className="size-5" />
+                      )}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom" className="text-[10px] uppercase font-bold tracking-widest">
+                    Vibration: {permission?.allowVibrate ? "On" : "Off"}
+                  </TooltipContent>
+                </Tooltip>
+              )}
+
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="icon"
-                    onClick={() => setPermissions("allowVibrate", !permission?.allowVibrate)}
+                    onClick={() => setPermissions("allowAudio", !permission?.allowAudio)}
                     className={cn(
-                      "w-14 h-14 backdrop-blur-xl border-border/50 transition-all shadow-lg",
-                      permission?.allowVibrate ? "text-foreground" : "hover:bg-card/60 text-foreground/50"
+                      "w-10 h-10 transition-all",
+                      permission?.allowAudio ? "text-foreground bg-accent/10" : "text-muted-foreground/40"
                     )}
                   >
-                    {permission?.allowVibrate ? <VibrateIcon className="size-6" /> : <VibrateOff className="size-6" />}
+                    {permission?.allowAudio ? <Volume2Icon className="size-5" /> : <VolumeOff className="size-5" />}
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent
-                  side="bottom"
-                  className="bg-foreground text-background text-xs uppercase font-bold tracking-widest rounded-none border-none"
-                >
-                  {permission?.allowVibrate ? "Vibration On" : "Vibration Off"}
+                <TooltipContent side="bottom" className="text-[10px] uppercase font-bold tracking-widest">
+                  Audio: {permission?.allowAudio ? "On" : "Off"}
                 </TooltipContent>
               </Tooltip>
-            )}
-
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => setPermissions("allowAudio", !permission?.allowAudio)}
-                  className={cn(
-                    "w-14 h-14 backdrop-blur-xl border-border/50 transition-all shadow-lg",
-                    permission?.allowAudio ? "bg-foreground" : "bg-foreground/50 text-foreground/50"
-                  )}
-                >
-                  {permission?.allowAudio ? <Volume2Icon className="size-6" /> : <VolumeOff className="size-6" />}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent
-                side="bottom"
-                className="bg-foreground text-background text-xs uppercase font-bold tracking-widest rounded-none border-none"
-              >
-                {permission?.allowAudio ? "Audio On" : "Audio Off"}
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+            </TooltipProvider>
+          </div>
         </div>
       </div>
 
-      <div className="relative group">
-        <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 to-transparent rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-        <Card className="relative w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] p-4 sm:p-6 bg-card/40 backdrop-blur-md border-border/50 rounded-xl overflow-hidden shadow-2xl">
-          <CardContent className="p-0 h-full">
-            {!completed ? (
-              <div className="grid grid-cols-4 gap-2 sm:gap-4 h-full">
-                {matrix.map((row, rowIndex) =>
-                  row?.map((item, colIndex) => {
-                    const isCorrect = item !== -1 && item === solution[rowIndex][colIndex];
-                    return (
-                      <button
-                        key={`${rowIndex}-${colIndex}-${item}`}
-                        onClick={() => handleTileMove(rowIndex, colIndex)}
-                        className={cn(
-                          "relative group h-full w-full flex items-center justify-center text-3xl font-black rounded-sm transition-all duration-200 select-none overflow-hidden border-2",
-                          item === -1
-                            ? "bg-transparent cursor-default border-transparent"
-                            : isCorrect
-                            ? "bg-card text-primary shadow-inner border-primary/50"
-                            : "bg-white text-black active:scale-95 hover:bg-white/95 shadow-2xl border-transparent opacity-90"
-                        )}
-                      >
-                        {item !== -1 && (
-                          <>
-                            <div
-                              className={cn(
-                                "absolute top-1 left-1.5 text-[12px]  tracking-tighter transition-all duration-300",
-                                isCorrect ? "opacity-100 text-primary/50" : "opacity-50"
-                              )}
-                            >
-                              0x{item.toString(16).toUpperCase().padStart(2, "0")}
-                            </div>
-                            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                            <span className="relative z-10">{item}</span>
-                          </>
-                        )}
-                      </button>
-                    );
-                  })
-                )}
-              </div>
-            ) : (
-              <div className="h-full flex flex-col items-center justify-center text-center animate-in fade-in zoom-in duration-700">
-                <Badge
-                  variant="outline"
-                  className="mb-6 bg-foreground text-background border-none px-6 py-1 text-sm font-bold uppercase tracking-[0.2em]"
-                >
-                  Success
-                </Badge>
-                <h2 className="text-4xl font-black tracking-tighter mb-4 uppercase text-foreground">System Solved</h2>
-                <p className="text-muted-foreground text-base italic max-w-[280px] leading-relaxed">
-                  Sequence verified. Efficiency reached in <span className="text-foreground font-bold">{moves}</span>{" "}
-                  circles.
-                </p>
-                <Button
-                  onClick={handleResetClick}
-                  className="mt-10 px-12 text-base font-bold uppercase tracking-widest transition-transform hover:scale-105 active:scale-95 shadow-xl"
-                >
-                  Restart Sequence
-                </Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+      {/* Main Game Area */}
+      <div className="flex-1 w-full flex flex-col items-center justify-center p-4 gap-8 overflow-y-auto">
+        <div className="relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 to-transparent rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+          <Card className="relative w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] p-4 sm:p-6 bg-card/40 backdrop-blur-md border-border/50 rounded-xl overflow-hidden shadow-2xl">
+            <CardContent className="p-0 h-full">
+              {!completed ? (
+                <div className="grid grid-cols-4 gap-2 sm:gap-4 h-full">
+                  {matrix.map((row, rowIndex) =>
+                    row?.map((item, colIndex) => {
+                      const isCorrect = item !== -1 && item === solution[rowIndex][colIndex];
+                      return (
+                        <button
+                          key={`${rowIndex}-${colIndex}-${item}`}
+                          onClick={() => handleTileMove(rowIndex, colIndex)}
+                          className={cn(
+                            "relative group h-full w-full flex items-center justify-center text-3xl font-black rounded-sm transition-all duration-200 select-none overflow-hidden border-2",
+                            item === -1
+                              ? "bg-transparent cursor-default border-transparent"
+                              : isCorrect
+                              ? "bg-card text-primary shadow-inner border-primary/50"
+                              : "bg-white text-black active:scale-95 hover:bg-white/95 shadow-2xl border-transparent opacity-90"
+                          )}
+                        >
+                          {item !== -1 && (
+                            <>
+                              <div
+                                className={cn(
+                                  "absolute top-1 left-1.5 text-[12px] font-mono font-light transition-all duration-300",
+                                  isCorrect ? "opacity-100 text-primary/50" : "opacity-50"
+                                )}
+                              >
+                                0x{item.toString(16).toUpperCase().padStart(2, "0")}
+                              </div>
+                              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                              <span className="relative z-10">{item}</span>
+                            </>
+                          )}
+                        </button>
+                      );
+                    })
+                  )}
+                </div>
+              ) : (
+                <div className="h-full flex flex-col items-center justify-center text-center animate-in fade-in zoom-in duration-700">
+                  <Badge
+                    variant="outline"
+                    className="mb-6 bg-foreground text-background border-none px-6 py-1 text-sm font-bold uppercase tracking-[0.2em]"
+                  >
+                    Success
+                  </Badge>
+                  <h2 className="text-4xl font-black tracking-tighter mb-4 uppercase text-foreground">System Solved</h2>
+                  <p className="text-muted-foreground text-base italic max-w-[280px] leading-relaxed">
+                    Sequence verified. Efficiency reached in <span className="text-foreground font-bold">{moves}</span>{" "}
+                    circles.
+                  </p>
+                  <Button
+                    onClick={handleResetClick}
+                    className="mt-10 px-12 text-base font-bold uppercase tracking-widest transition-transform hover:scale-105 active:scale-95 shadow-xl"
+                  >
+                    Restart Sequence
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
 
-      <Button
-        onClick={handleResetClick}
-        variant="secondary"
-        className="w-full max-w-[350px] sm:max-w-[500px] h-14 backdrop-blur-md border border-border/50 bg-secondary/50 hover:bg-secondary/80 text-muted-foreground hover:text-foreground text-sm font-bold uppercase tracking-[0.2em] transition-all group"
-      >
-        <RotateCcw className="w-5 h-5 mr-3 group-hover:rotate-[-90deg] transition-transform duration-500" />
-        Force Restart (R)
-      </Button>
+        <Button
+          onClick={handleResetClick}
+          variant="secondary"
+          className="w-full max-w-[350px] sm:max-w-[500px] h-14 backdrop-blur-md border border-border/50 bg-secondary/50 hover:bg-secondary/80 text-muted-foreground hover:text-foreground text-sm font-bold uppercase tracking-[0.2em] transition-all group"
+        >
+          <RotateCcw className="w-5 h-5 mr-3 group-hover:-rotate-90 transition-transform duration-500" />
+          Force Restart (R)
+        </Button>
+      </div>
     </div>
   );
 }

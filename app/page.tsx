@@ -174,7 +174,7 @@ export default function LandingPage() {
       </section>
 
       {/* Simple Footer */}
-      <footer className="py-16 border-t border-border/40">
+      <footer className="py-8 md:py-16 border-t border-border/40">
         <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-4">
             <div className="w-6 h-6 rounded bg-foreground/10 flex items-center justify-center">

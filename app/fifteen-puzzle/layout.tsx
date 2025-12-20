@@ -49,17 +49,22 @@ export default function FifteenPuzzleGameLayout({ children }: Readonly<{ childre
       <div className="absolute top-0 left-0 h-16 border-b w-full flex items-center justify-between px-6 backdrop-blur-md z-50">
         <Link
           href="/"
-          className="flex items-center gap-3 text-base font-medium text-muted-foreground hover:text-foreground transition-colors group"
+          className="flex items-center gap-1.5 sm:gap-3 text-xs sm:text-base font-medium text-muted-foreground hover:text-foreground transition-colors group"
         >
-          <MoveLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
-          Back to Hub
+          <MoveLeft className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:-translate-x-1" />
+          <span>
+            Back<span className="hidden sm:inline"> to Hub</span>
+          </span>
         </Link>
-        <div className="font-semibold tracking-wider uppercase text-xs text-gray-400">Fifteen Puzzle</div>
-        <div className="w-20" /> {/* Spacer */}
+        <div className="absolute left-1/2 -translate-x-1/2 font-semibold tracking-wider uppercase text-muted-foreground/60 whitespace-nowrap">
+          Fifteen Puzzle
+        </div>
+        <div className="w-10 sm:w-20" /> {/* Spacer */}
       </div>
-      <main className="absolute w-full top-16 bottom-10">{children}</main>
-      <div className="absolute flex justify-center py-6 bottom-0 left-0 w-full border-t border-border/40 bg-background/20 backdrop-blur-sm">
-        <div className="text-sm text-muted-foreground uppercase tracking-[0.2em] font-bold">
+
+      <main className="absolute w-full top-16 bottom-10 sm:bottom-20 overflow-y-auto">{children}</main>
+      <div className="absolute flex justify-center py-3 sm:py-6 bottom-0 left-0 w-full border-t border-border/40 bg-background/20 backdrop-blur-sm">
+        <div className="text-[10px] sm:text-sm text-muted-foreground uppercase tracking-[0.2em] font-bold">
           Developed by{" "}
           <a
             href="https://mastrovia.com"
