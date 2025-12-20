@@ -136,38 +136,77 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className="py-24 border-t border-border/40">
+      {/* Laboratory Ethos */}
+      <section className="py-32 border-t border-border/40 relative overflow-hidden">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-            <div className="space-y-6">
-              <div className="w-10 h-10 flex items-center justify-center rounded bg-foreground text-background">
-                <Gamepad2 className="w-5 h-5" />
-              </div>
-              <h3 className="text-xl font-bold">Minimalist Fun</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                We believe in stripping away the bloat. No ads, no tracking, just pure interaction designed for curious
-                minds.
-              </p>
+          <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
+            <div className="lg:w-1/3">
+              <Badge variant="outline" className="mb-6 px-3 py-1 border-primary/20 text-primary/60 bg-primary/5">
+                The Protocol
+              </Badge>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-8 max-w-[300px]">
+                Laboratory <br />
+                <span className="italic font-light opacity-50">Ethos</span>
+              </h2>
+              <div className="h-px w-20 bg-foreground/20" />
             </div>
-            <div className="space-y-6">
-              <div className="w-10 h-10 flex items-center justify-center rounded bg-foreground text-background">
-                <Code2 className="w-5 h-5" />
+
+            <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+              <div className="group">
+                <div className="text-[10px] font-mono text-muted-foreground/40 mb-4 tracking-[0.3em] uppercase">
+                  // protocol_01
+                </div>
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
+                  <span className="w-2 h-2 rounded-full bg-foreground" />
+                  Simple
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
+                  Just the essentials. We stripped away the bloat so you can jump straight into the experience without
+                  any distractions or complex setup.
+                </p>
               </div>
-              <h3 className="text-xl font-bold">Open Architecture</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Built with modern tech stacks like Next.js 15, Tailwind, and Shadcn. Every component is designed to be
-                modular and readable.
-              </p>
-            </div>
-            <div className="space-y-6">
-              <div className="w-10 h-10 flex items-center justify-center rounded bg-foreground text-background">
-                <Heart className="w-5 h-5" />
+
+              <div className="group">
+                <div className="text-[10px] font-mono text-muted-foreground/40 mb-4 tracking-[0.3em] uppercase">
+                  // protocol_02
+                </div>
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
+                  <span className="w-2 h-2 rounded-full bg-foreground" />
+                  Interactive
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
+                  A digital playground for the curious. Everything here is meant to be touched, clicked, and tested—feel
+                  free to explore every corner of the lab.
+                </p>
               </div>
-              <h3 className="text-xl font-bold">Community First</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                A project born out of curiosity. Aimed at developers who love polishing small things until they shine.
-              </p>
+
+              <div className="group">
+                <div className="text-[10px] font-mono text-muted-foreground/40 mb-4 tracking-[0.3em] uppercase">
+                  // protocol_03
+                </div>
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
+                  <span className="w-2 h-2 rounded-full bg-foreground" />
+                  Fun
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
+                  Built purely for the joy of it. No ulterior motives, no tracking—just the raw satisfaction of a solved
+                  sequence and a brief moment of fun.
+                </p>
+              </div>
+
+              <div className="group">
+                <div className="text-[10px] font-mono text-muted-foreground/40 mb-4 tracking-[0.3em] uppercase">
+                  // protocol_04
+                </div>
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
+                  <span className="w-2 h-2 rounded-full bg-foreground" />
+                  Open Source
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
+                  Power to the community. Developed as a free gift to the open-source world. Our lab is your lab—feel
+                  free to fork, hack, and improve together.
+                </p>
+              </div>
             </div>
           </div>
         </div>
