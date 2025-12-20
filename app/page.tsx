@@ -83,13 +83,13 @@ export default function LandingPage() {
               Interactive and built for the pure joy of the solve.
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300 fill-mode-both">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300 fill-mode-both w-full max-w-md mx-auto sm:max-w-none">
               <Button
                 size="lg"
                 asChild
-                className="rounded-none h-14 px-12 bg-foreground text-background hover:bg-foreground/90 text-xs font-black uppercase tracking-[0.3em] transition-all group"
+                className="rounded-none h-12 sm:h-14 px-8 sm:px-12 bg-foreground text-background hover:bg-foreground/90 text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] transition-all group w-full sm:w-auto"
               >
-                <Link href="#games" className="flex items-center gap-3">
+                <Link href="#games" className="flex items-center justify-center gap-3">
                   Access Protocol
                   <MoveRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
                 </Link>
@@ -97,9 +97,9 @@ export default function LandingPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="rounded-none h-14 px-12 border-border/40 hover:bg-foreground hover:text-foreground text-xs font-black uppercase tracking-[0.3em] transition-all"
+                className="rounded-none h-12 sm:h-14 px-8 sm:px-12 border-border/40 hover:bg-foreground hover:text-foreground text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] transition-all w-full sm:w-auto"
               >
-                <Link href="https://mastrovia.com" target="_blank">
+                <Link href="https://mastrovia.com" target="_blank" className="flex items-center justify-center w-full">
                   The Studio
                 </Link>
               </Button>
