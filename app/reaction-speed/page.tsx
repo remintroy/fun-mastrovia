@@ -240,7 +240,7 @@ export default function ReactionSpeed() {
             state === "waiting"
               ? "border-primary/40 bg-primary/5 shadow-[0_0_50px_-20px_--theme(--color-primary/20%)]"
               : state === "ready"
-              ? "border-primary bg-primary/20 shadow-[0_0_100px_-20px_--theme(--color-primary/40%)]"
+              ? "border-emerald-500 bg-emerald-500/20 shadow-[0_0_100px_-20px_--theme(--color-emerald-500/40%)]"
               : state === "early"
               ? "border-destructive/30 bg-destructive/5"
               : "border-border/60 bg-card/10 hover:border-primary/40 hover:bg-card/20"
@@ -253,7 +253,7 @@ export default function ReactionSpeed() {
           <div className="absolute inset-0 pointer-events-none opacity-20">
             <div
               className={`absolute inset-0 bg-radial-at-center from-current via-transparent to-transparent ${
-                state === "ready" ? "text-primary" : state === "waiting" ? "text-muted-foreground" : "text-primary"
+                state === "ready" ? "text-emerald-500" : state === "waiting" ? "text-muted-foreground" : "text-primary"
               }`}
             />
           </div>
@@ -322,8 +322,8 @@ export default function ReactionSpeed() {
                 animate={{ scale: 1, opacity: 1 }}
                 className="h-full flex flex-col items-center justify-center"
               >
-                <div className="absolute inset-0 bg-primary/20 animate-pulse" />
-                <h2 className="text-6xl sm:text-8xl md:text-[10rem] font-black text-primary tracking-tighter drop-shadow-[0_0_40px_--theme(--color-primary/50%)]">
+                <div className="absolute inset-0 bg-emerald-500/20 animate-pulse" />
+                <h2 className="text-6xl sm:text-8xl md:text-[10rem] font-black text-emerald-500 tracking-tighter drop-shadow-[0_0_40px_--theme(--color-emerald-500/50%)]">
                   PULSE!
                 </h2>
               </motion.div>
