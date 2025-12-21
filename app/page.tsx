@@ -53,12 +53,7 @@ const games = [
 
 export default function LandingPage() {
   return (
-    <div className="relative min-h-screen bg-background text-foreground selection:bg-primary/10 font-sans">
-      {/* Zen Laboratory Background */}
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-20%,hsl(var(--muted)),transparent)]" />
-      <div className="fixed inset-0 -z-10 bg-grid opacity-[0.05] pointer-events-none" />
-      <div className="fixed inset-0 -z-10 bg-[url('/textures/grains.png')] opacity-[0.02] pointer-events-none" />
-
+    <div className="relative min-h-screen bg-background/10 text-foreground selection:bg-primary/10 font-sans">
       {/* Minimal Nav */}
       <nav className="border-b border-border/40 backdrop-blur-md fixed top-0 left-0 right-0 z-50 bg-background/80">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
@@ -89,6 +84,11 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <header className="relative pt-24 pb-16 px-6 lg:pt-40 lg:pb-32 overflow-hidden">
+        {/* Zen Laboratory Background */}
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-20%,hsl(var(--muted)),transparent)]" />
+        <div className="absolute inset-0 -z-10 bg-grid opacity-[0.05] pointer-events-none" />
+        <div className="absolute inset-0 -z-10 bg-[url('/textures/grains.png')] opacity-[0.02] pointer-events-none" />
+
         <div className="scanline" />
         <div className="container mx-auto max-w-5xl relative">
           {/* Decorative Lab Elements */}
