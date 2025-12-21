@@ -15,8 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mastrovia fun hub",
-  description: "A collection of fun and interactive games.",
+  title: "Mastrovia Lab | Interactive Research Hub",
+  description:
+    "Explore the physical and digital dimensions of computing through high-fidelity interactive experiments and diagnostics.",
   manifest: "/manifest.json",
 };
 

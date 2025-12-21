@@ -118,7 +118,7 @@ export default function ReactionSpeed() {
   }, [history]);
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground font-sans selection:bg-primary/10 overflow-x-hidden pt-44 pb-24 md:pt-56 md:pb-32 px-4 sm:px-8 flex flex-col items-center">
+    <div className="relative min-h-screen bg-background text-foreground font-sans selection:bg-primary/10 overflow-x-hidden flex flex-col">
       {/* 🧬 Zen Laboratory Background (Mastrovia Standard) */}
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-20%,hsl(var(--muted)),transparent)]" />
       <div className="fixed inset-0 -z-10 bg-grid opacity-[0.05] pointer-events-none" />
@@ -145,10 +145,11 @@ export default function ReactionSpeed() {
         </div>
       </div>
 
-      {/* --- HUD --- */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group">
+      {/* --- STANDARDIZED MASTROVIA NAVBAR --- */}
+      <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          {/* Brand Left */}
+          <Link href="/" className="flex items-center gap-3 group shrink-0 w-[120px] sm:w-[200px]">
             <div className="relative w-8 h-8 flex items-center justify-center overflow-hidden">
               <Image
                 src="/mastrovia-logo.webp"
@@ -158,58 +159,65 @@ export default function ReactionSpeed() {
                 className="object-contain transition-transform group-hover:scale-110"
               />
             </div>
-            <div className="flex flex-col">
-              <span className="font-bold tracking-tight text-lg uppercase leading-none">
-                Mastrovia <span className="text-muted-foreground/40 font-light italic text-sm">Lab</span>
+            <div className="hidden sm:flex flex-col">
+              <span className="font-bold tracking-tight text-base uppercase leading-none">
+                Mastrovia <span className="text-muted-foreground/40 font-light italic text-xs">Lab</span>
               </span>
-              <span className="text-[8px] font-mono text-muted-foreground/60 uppercase tracking-[0.2em] mt-1">
+              <span className="text-[7px] font-mono text-muted-foreground/60 uppercase tracking-[0.2em] mt-0.5">
                 fun.mastrovia.com
               </span>
             </div>
           </Link>
 
-          <div className="flex items-center gap-4 sm:gap-8">
-            <div className="flex items-center">
-              <div className="flex flex-col justify-center min-w-[70px] border-r border-border/20 pr-4">
-                <span className="text-[10px] uppercase tracking-[0.1em] text-muted-foreground/60 font-bold leading-none mb-1">
-                  Avg_Ms
-                </span>
-                <span className="text-lg font-mono leading-none tracking-tighter tabular-nums text-foreground/90 font-black">
-                  {averageTime}
-                </span>
-              </div>
-              <div className="flex flex-col justify-center min-w-[70px] pl-4">
-                <span className="text-[10px] uppercase tracking-[0.1em] text-muted-foreground/60 font-bold leading-none mb-1">
-                  Trials
-                </span>
-                <span className="text-lg font-mono leading-none tracking-tighter tabular-nums text-foreground/90 font-black">
-                  {history.length}
-                </span>
-              </div>
-            </div>
+          {/* Title Center */}
+          <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
+            <span className="text-[9px] font-mono text-primary/60 uppercase tracking-[0.3em] leading-none mb-1">
+              Experiment_02
+            </span>
+            <h1 className="text-sm sm:text-lg font-black tracking-tighter uppercase italic leading-none text-foreground whitespace-nowrap">
+              Reaction Speed
+            </h1>
+          </div>
+
+          {/* Exit Right */}
+          <div className="flex justify-end w-[120px] sm:w-[200px]">
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors bg-secondary/30 hover:bg-secondary/50 px-3 sm:px-4 py-2 border border-border/40 group shrink-0"
+            >
+              <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
+              <span className="hidden sm:inline">Exit_Lab</span>
+            </Link>
           </div>
         </div>
       </nav>
 
-      {/* Subject Context Header */}
-      <header className="fixed top-24 left-0 right-0 z-40 px-6 pointer-events-none">
-        <div className="container mx-auto max-w-7xl flex flex-col gap-4">
-          <Link
-            href="/"
-            className="pointer-events-auto w-fit flex items-center gap-2 text-[10px] font-mono text-muted-foreground hover:text-primary transition-colors group mb-2 border border-border/40 px-3 py-1 bg-background/50 backdrop-blur-sm"
-          >
-            <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
-            SUBJECT_EXIT_PROTOCOL
-          </Link>
-          <div className="hidden md:block">
-            <div className="text-[10px] font-mono text-primary/60 mb-1 tracking-[0.4em] uppercase">
-              // research_diagnostic_03
+      {/* --- STATS TOOLBAR (15-Puzzle Modular Style) --- */}
+      <div className="sticky top-16 z-40 bg-background/50 backdrop-blur-md border-b border-border/40">
+        <div className="max-w-lg mx-auto h-14 px-6 flex items-center justify-between">
+          <div className="flex items-center flex-1 justify-center gap-12">
+            <div className="flex flex-col justify-center items-center min-w-[70px]">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70 font-bold leading-none mb-1">
+                Avg_Ms
+              </span>
+              <span className="text-xl font-mono leading-none tracking-tighter tabular-nums text-foreground font-black">
+                {averageTime}
+              </span>
             </div>
-            <h2 className="text-4xl font-black tracking-tighter uppercase italic leading-none">Synapse Pulse</h2>
+            <div className="w-px h-6 bg-border/20" />
+            <div className="flex flex-col justify-center items-center min-w-[60px]">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70 font-bold leading-none mb-1">
+                Trials
+              </span>
+              <span className="text-xl font-mono leading-none tracking-tighter tabular-nums text-foreground font-black">
+                {history.length}
+              </span>
+            </div>
           </div>
         </div>
-      </header>
+      </div>
 
+      {/* Identifiers (Floating) */}
       <div className="fixed bottom-12 left-12 z-50 opacity-20 hidden lg:block select-none pointer-events-none">
         <div className="text-[8px] font-mono uppercase tracking-[0.8em] mb-2 scale-y-110">fun.mastrovia.com</div>
         <div className="h-px w-24 bg-foreground/20" />
@@ -223,7 +231,7 @@ export default function ReactionSpeed() {
       </div>
 
       {/* --- MAIN INTERFACE --- */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center flex-1 p-6 md:p-12 overflow-y-auto">
         {/* Cinematic Test Chamber */}
         <motion.div
           onPointerDown={handleClick}
@@ -502,6 +510,63 @@ export default function ReactionSpeed() {
                 transistors operate at sub-nanosecond scales, your nervous system represents the ultimate bottleneck in
                 high-frequency computation."
               </p>
+            </div>
+          </div>
+
+          {/* --- EDUCATIONAL BENCHMARKS (Understandable for General Audience) --- */}
+          <div className="lg:col-span-12 mt-16 pt-16 border-t border-border/20">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-[10px] font-mono text-primary/60 mb-6 tracking-[0.4em] uppercase text-center">
+                // biological_context_report
+              </div>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tighter text-center uppercase italic mb-12 text-foreground">
+                How do you <span className="text-muted-foreground/40 not-italic">measure up?</span>
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="bg-card/30 border border-border/40 p-8 hover:border-primary/20 transition-colors group">
+                  <div className="text-primary text-xs font-mono uppercase tracking-widest mb-4 opacity-60">
+                    The Baseline
+                  </div>
+                  <h3 className="text-2xl font-black mb-3 text-foreground">~250ms</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed italic">
+                    The average human reaction speed. If you are consistently hitting this range, your central nervous
+                    system is operating at peak standard health.
+                  </p>
+                </div>
+
+                <div className="bg-primary/5 border border-primary/20 p-8 hover:bg-primary/10 transition-all group scale-105 shadow-2xl">
+                  <div className="text-primary text-xs font-mono uppercase tracking-widest mb-4">Elite Tier</div>
+                  <h3 className="text-2xl font-black mb-3 text-primary">150ms - 200ms</h3>
+                  <p className="text-sm text-foreground/80 leading-relaxed font-bold italic">
+                    Professional gamers and athletes often inhabit this zone. This requires high-bandwidth neural
+                    processing and intense focus.
+                  </p>
+                </div>
+
+                <div className="bg-card/30 border border-border/40 p-8 hover:border-primary/20 transition-colors group">
+                  <div className="text-primary text-xs font-mono uppercase tracking-widest mb-4 opacity-60">
+                    Fun Fact
+                  </div>
+                  <h3 className="text-2xl font-black mb-3 text-foreground">Faster than a blink</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed italic">
+                    The average human blink takes roughly 300ms. If your reaction is 200ms, you are literally reacting
+                    faster than it takes to close your eyes.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-12 p-8 bg-muted/20 border-l-4 border-primary/40">
+                <h4 className="text-xs font-black uppercase tracking-[0.3em] mb-3 text-foreground">
+                  Why does it matter?
+                </h4>
+                <p className="text-sm text-muted-foreground leading-relaxed italic">
+                  Reaction speed is more than just "gaming skills"—it reflects your brain's ability to process visual
+                  information and send a physical command to your hand. Factors like **sleep**, **age**, and even
+                  **caffeine** can shift your score by 50ms or more. Test yourself throughout the day to see your
+                  biometric drift!
+                </p>
+              </div>
             </div>
           </div>
         </div>

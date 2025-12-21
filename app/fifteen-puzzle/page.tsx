@@ -3,7 +3,9 @@
 import usePermissions from "@/hooks/usePermissions";
 import useSettingsStore from "@/lib/store/settingsStore";
 import { cn, event } from "@/lib/utils";
-import { VibrateIcon, VibrateOff, Volume2Icon, VolumeOff, RotateCcw } from "lucide-react";
+import { VibrateIcon, VibrateOff, Volume2Icon, VolumeOff, RotateCcw, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -241,9 +243,61 @@ export default function FifteenPuzzleHome() {
   }, [matrix]);
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="relative min-h-screen bg-background text-foreground font-sans selection:bg-primary/10 overflow-x-hidden flex flex-col">
+      {/* 🧬 Zen Laboratory Background (Mastrovia Standard) */}
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-20%,hsl(var(--muted)),transparent)]" />
+      <div className="fixed inset-0 -z-10 bg-grid opacity-[0.05] pointer-events-none" />
+      <div className="fixed inset-0 -z-10 bg-[url('/textures/grains.png')] opacity-[0.02] pointer-events-none" />
+
+      {/* --- STANDARDIZED MASTROVIA NAVBAR --- */}
+      <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40 w-full">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          {/* Brand Left */}
+          <Link href="/" className="flex items-center gap-3 group shrink-0 w-[120px] sm:w-[200px]">
+            <div className="relative w-8 h-8 flex items-center justify-center overflow-hidden">
+              <Image
+                src="/mastrovia-logo.webp"
+                alt="Mastrovia Logo"
+                width={32}
+                height={32}
+                className="object-contain transition-transform group-hover:scale-110"
+              />
+            </div>
+            <div className="hidden sm:flex flex-col">
+              <span className="font-bold tracking-tight text-base uppercase leading-none">
+                Mastrovia <span className="text-muted-foreground/40 font-light italic text-xs">Lab</span>
+              </span>
+              <span className="text-[7px] font-mono text-muted-foreground/60 uppercase tracking-[0.2em] mt-0.5">
+                fun.mastrovia.com
+              </span>
+            </div>
+          </Link>
+
+          {/* Title Center */}
+          <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
+            <span className="text-[9px] font-mono text-primary/60 uppercase tracking-[0.3em] leading-none mb-1">
+              Experiment_01
+            </span>
+            <h1 className="text-sm sm:text-lg font-black tracking-tighter uppercase italic leading-none text-foreground whitespace-nowrap">
+              Fifteen Puzzle
+            </h1>
+          </div>
+
+          {/* Exit Right */}
+          <div className="flex justify-end w-[120px] sm:w-[200px]">
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors bg-secondary/30 hover:bg-secondary/50 px-3 sm:px-4 py-2 border border-border/40 group shrink-0"
+            >
+              <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
+              <span className="hidden sm:inline">Exit_Lab</span>
+            </Link>
+          </div>
+        </div>
+      </nav>
+
       {/* Universal Game Toolbar */}
-      <div className="w-full border-b border-border/40 bg-background/50 backdrop-blur-md">
+      <div className="sticky top-16 z-40 w-full border-b border-border/40 bg-background/50 backdrop-blur-md px-6">
         <div className="max-w-lg mx-auto h-14 px-6 flex items-center justify-between shrink-0">
           <div className="flex items-center">
             <div className="flex flex-col justify-center min-w-[70px]">

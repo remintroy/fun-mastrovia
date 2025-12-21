@@ -18,6 +18,17 @@ const games = [
     difficulty: "Medium",
   },
   {
+    id: "reaction-speed",
+    title: "Reaction Speed",
+    description:
+      "Test your physical interaction throughput. Benchmark your reaction time against historical hardware interrupts.",
+    image: "/reaction-speed/images/banner.png",
+    category: "Biometrics",
+    stack: "React, LocalStorage, CSS",
+    href: "/reaction-speed",
+    difficulty: "Medium",
+  },
+  {
     id: "scale-of-computing",
     title: "The Silicon Scale",
     description:
@@ -27,17 +38,6 @@ const games = [
     stack: "React, Framer Motion, CSS",
     href: "/scale-of-computing",
     difficulty: "Beginner",
-  },
-  {
-    id: "reaction-speed",
-    title: "Synapse Pulse",
-    description:
-      "Test your physical interaction throughput. Benchmark your reaction time against historical hardware interrupts.",
-    image: "/reaction-speed/images/banner.png",
-    category: "Biometrics",
-    stack: "React, LocalStorage, CSS",
-    href: "/reaction-speed",
-    difficulty: "Medium",
   },
   {
     id: "captcha-gauntlet",
