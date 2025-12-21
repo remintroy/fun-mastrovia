@@ -1,8 +1,3 @@
-import { cn } from "@/lib/utils";
-
-import Link from "next/link";
-import Image from "next/image";
-import { MoveLeft } from "lucide-react";
 import type { Metadata } from "next";
 import { appConfig } from "@/lib/config";
 

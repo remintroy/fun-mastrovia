@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Gamepad2, MoveRight, Code2, Terminal, Shapes, Github, Heart } from "lucide-react";
+import { MoveRight, Terminal, Shapes, Github } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -28,28 +27,28 @@ const games = [
     href: "/reaction-speed",
     difficulty: "Medium",
   },
-  {
-    id: "scale-of-computing",
-    title: "The Silicon Scale",
-    description:
-      "An immersive journey through the physical dimensions of computing. From subatomic particles to the global internet.",
-    image: "/scale-of-computing/images/banner.png",
-    category: "Simulation",
-    stack: "React, Framer Motion, CSS",
-    href: "/scale-of-computing",
-    difficulty: "Beginner",
-  },
-  {
-    id: "captcha-gauntlet",
-    title: "The Turing Test",
-    description:
-      "A parody series of increasingly absurd human-validation tests. Prove you have the irrationality of biological life.",
-    image: "/captcha-gauntlet/images/banner.png",
-    category: "Psychology",
-    stack: "React, Framer Motion",
-    href: "/captcha-gauntlet",
-    difficulty: "Hard",
-  },
+  // {
+  //   id: "scale-of-computing",
+  //   title: "The Silicon Scale",
+  //   description:
+  //     "An immersive journey through the physical dimensions of computing. From subatomic particles to the global internet.",
+  //   image: "/scale-of-computing/images/banner.png",
+  //   category: "Simulation",
+  //   stack: "React, Framer Motion, CSS",
+  //   href: "/scale-of-computing",
+  //   difficulty: "Beginner",
+  // },
+  // {
+  //   id: "captcha-gauntlet",
+  //   title: "The Turing Test",
+  //   description:
+  //     "A parody series of increasingly absurd human-validation tests. Prove you have the irrationality of biological life.",
+  //   image: "/captcha-gauntlet/images/banner.png",
+  //   category: "Psychology",
+  //   stack: "React, Framer Motion",
+  //   href: "/captcha-gauntlet",
+  //   difficulty: "Hard",
+  // },
 ];
 
 export default function LandingPage() {
@@ -246,7 +245,7 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center cursor-default">
               <div className="lg:col-span-3 order-2 lg:order-1">
                 <div className="flex items-center gap-4">
-                  <span className="text-5xl font-black tabular-nums text-foreground/20">02</span>
+                  <span className="text-5xl font-black tabular-nums text-foreground/20">0{games.length + 1}</span>
                   <div className="flex flex-col">
                     <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                       Project_ID
