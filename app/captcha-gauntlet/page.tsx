@@ -102,25 +102,28 @@ export default function CaptchaGauntlet() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 md:p-12 font-sans selection:bg-cyan-500/20">
+    <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center p-6 md:p-12 font-sans selection:bg-primary/20">
       {/* Background Ambience */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_40%,#0a0a0a_0%,#000_100%)]" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_40%,hsl(var(--muted)),transparent)] opacity-20" />
         <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
       </div>
 
       {/* Lab Header */}
       <div className="fixed top-12 left-0 right-0 px-12 flex justify-between items-center z-50">
         <div className="flex flex-col gap-1">
-          <div className="text-[10px] font-mono text-cyan-500 uppercase tracking-[0.5em]">Project_Gauntlet</div>
+          <div className="text-[10px] font-mono text-primary uppercase tracking-[0.5em]">Project_Gauntlet</div>
           <div className="text-xl font-black tracking-tighter italic">HUMAN_VALIDATION</div>
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="w-32 h-1 bg-white/5 rounded-full overflow-hidden">
-            <motion.div className="h-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]" animate={{ width: `${progress}%` }} />
+          <div className="w-32 h-1 bg-muted rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-primary shadow-[0_0_10px_--theme(--color-primary/50%)]"
+              animate={{ width: `${progress}%` }}
+            />
           </div>
-          <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
+          <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
             Stage {levelIdx + 1}/{LEVELS.length}
           </span>
         </div>
@@ -129,7 +132,7 @@ export default function CaptchaGauntlet() {
       {/* Main Validation Card */}
       <motion.div
         layout
-        className="relative z-10 w-full max-w-md bg-[#0a0a0a] border border-white/10 rounded-4xl p-10 shadow-2xl overflow-hidden"
+        className="relative z-10 w-full max-w-md bg-card border border-border rounded-4xl p-10 shadow-2xl overflow-hidden"
       >
         <AnimatePresence mode="wait">
           {status === "processing" ? (
@@ -141,16 +144,16 @@ export default function CaptchaGauntlet() {
               className="flex flex-col items-center justify-center py-20 gap-8"
             >
               <div className="relative">
-                <div className="w-16 h-16 border-2 border-cyan-500/20 rounded-full" />
+                <div className="w-16 h-16 border-2 border-primary/20 rounded-full" />
                 <motion.div
-                  className="absolute inset-0 border-t-2 border-cyan-500 rounded-full"
+                  className="absolute inset-0 border-t-2 border-primary rounded-full"
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                 />
               </div>
               <div className="space-y-2 text-center">
-                <div className="text-sm font-black uppercase tracking-[0.3em] text-cyan-400">Analyzing Biometrics</div>
-                <div className="text-[10px] font-mono text-white/30 uppercase tracking-widest">
+                <div className="text-sm font-black uppercase tracking-[0.3em] text-primary">Analyzing Biometrics</div>
+                <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
                   Packet trace in progress...
                 </div>
               </div>
@@ -162,16 +165,16 @@ export default function CaptchaGauntlet() {
               animate={{ opacity: 1, scale: 1 }}
               className="flex flex-col items-center justify-center py-20 gap-8"
             >
-              <div className="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center border border-emerald-500/30">
-                <CheckCircle2 className="w-10 h-10 text-emerald-400" />
+              <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center border border-primary/30">
+                <CheckCircle2 className="w-10 h-10 text-primary" />
               </div>
               <div className="space-y-2 text-center">
                 <div className="text-2xl font-black uppercase tracking-tighter">Identity Verified</div>
-                <div className="text-sm text-white/40 italic">You are definitively human. For now.</div>
+                <div className="text-sm text-muted-foreground italic">You are definitively human. For now.</div>
               </div>
               <button
                 onClick={() => (window.location.href = "/")}
-                className="px-8 py-3 bg-white text-black font-black uppercase text-[10px] tracking-widest hover:scale-105 transition-transform"
+                className="px-8 py-3 bg-foreground text-background font-black uppercase text-[10px] tracking-widest hover:scale-105 transition-transform"
               >
                 Return to Lab
               </button>
@@ -186,29 +189,31 @@ export default function CaptchaGauntlet() {
             >
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
-                  <span className="p-1 rounded bg-cyan-500/10 text-cyan-500">
+                  <span className="p-1 rounded bg-primary/10 text-primary">
                     <ShieldCheck className="w-5 h-5" />
                   </span>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-white/40">{level.title}</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                    {level.title}
+                  </p>
                 </div>
                 <h2 className="text-2xl font-bold tracking-tight">{level.instruction}</h2>
               </div>
 
               {/* Level Logic */}
-              <div className="bg-black/40 rounded-2xl border border-white/5 p-6 md:p-8 min-h-[280px] flex items-center justify-center">
+              <div className="bg-background/40 rounded-2xl border border-border/50 p-6 md:p-8 min-h-[280px] flex items-center justify-center">
                 {level.type === "checkbox" && (
                   <div className="group relative flex items-center gap-4 cursor-pointer">
                     <motion.div
                       onClick={handleCheckbox}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-14 h-14 border border-white/20 rounded-2xl flex items-center justify-center bg-white/5 hover:bg-white/10 transition-colors"
+                      className="w-14 h-14 border border-border rounded-2xl flex items-center justify-center bg-accent/10 hover:bg-accent/20 transition-colors"
                     >
-                      <div className="w-4 h-4 border border-white/40 rounded-sm" />
+                      <div className="w-4 h-4 border border-foreground/40 rounded-sm" />
                     </motion.div>
                     <div className="flex flex-col">
                       <span className="text-sm font-bold uppercase tracking-widest">I am not a robot</span>
-                      <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest underline decoration-white/10">
+                      <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest underline decoration-border">
                         Read Privary Policy
                       </span>
                     </div>
@@ -224,13 +229,13 @@ export default function CaptchaGauntlet() {
                         whileHover={{ scale: 0.98 }}
                         whileTap={{ scale: 0.95 }}
                         className={`aspect-square relative rounded-lg cursor-pointer overflow-hidden border transition-colors ${
-                          selected.includes(item.id) ? "border-cyan-500 ring-2 ring-cyan-500/20" : "border-white/10"
+                          selected.includes(item.id) ? "border-primary ring-2 ring-primary/20" : "border-border/50"
                         }`}
                         style={{ background: item.texture }}
                       >
                         {selected.includes(item.id) && (
-                          <div className="absolute inset-0 bg-cyan-500/20 flex items-center justify-center backdrop-blur-[1px]">
-                            <CheckCircle2 className="w-6 h-6 text-white" />
+                          <div className="absolute inset-0 bg-primary/20 flex items-center justify-center backdrop-blur-[1px]">
+                            <CheckCircle2 className="w-6 h-6 text-foreground" />
                           </div>
                         )}
                       </motion.div>
@@ -248,7 +253,7 @@ export default function CaptchaGauntlet() {
                       <button
                         key={i}
                         onClick={nextLevel}
-                        className="w-full p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all text-left text-sm font-medium flex justify-between items-center group"
+                        className="w-full p-4 rounded-xl border border-border/40 bg-accent/5 hover:bg-accent/10 hover:border-border transition-all text-left text-sm font-medium flex justify-between items-center group"
                       >
                         {choice}
                         <MoveRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
@@ -265,30 +270,30 @@ export default function CaptchaGauntlet() {
                       y: [0, -3, 3, -3, 0],
                     }}
                     transition={{ duration: 0.1, repeat: Infinity }}
-                    className="w-24 h-24 bg-white rounded-full flex items-center justify-center cursor-pointer shadow-[0_0_30px_rgba(255,255,255,0.2)] active:scale-95 transition-all"
+                    className="w-24 h-24 bg-foreground rounded-full flex items-center justify-center cursor-pointer shadow-[0_0_30px_--theme(--color-foreground/20%)] active:scale-95 transition-all"
                   >
-                    <div className="w-16 h-16 border-2 border-black rounded-full" />
+                    <div className="w-16 h-16 border-2 border-background rounded-full" />
                   </motion.div>
                 )}
               </div>
 
               {/* Footer Controls */}
               <div className="flex items-center justify-between pt-4">
-                <button className="p-3 text-white/30 hover:text-white transition-colors">
+                <button className="p-3 text-muted-foreground hover:text-foreground transition-colors">
                   <RotateCw className="w-5 h-5" />
                 </button>
                 {level.type === "grid" && (
                   <button
                     onClick={verifyGrid}
                     disabled={selected.length === 0}
-                    className="px-8 py-3 bg-white text-black font-black uppercase text-xs tracking-widest hover:scale-105 active:scale-95 transition-all disabled:opacity-20 disabled:scale-100"
+                    className="px-8 py-3 bg-foreground text-background font-black uppercase text-xs tracking-widest hover:scale-105 active:scale-95 transition-all disabled:opacity-20 disabled:scale-100"
                   >
                     Verify Sequence
                   </button>
                 )}
                 <div className="flex gap-4">
-                  <HelpCircle className="w-4 h-4 text-white/20" />
-                  <Hash className="w-4 h-4 text-white/20" />
+                  <HelpCircle className="w-4 h-4 text-muted-foreground/30" />
+                  <Hash className="w-4 h-4 text-muted-foreground/30" />
                 </div>
               </div>
             </motion.div>
@@ -298,7 +303,7 @@ export default function CaptchaGauntlet() {
 
       {/* Lab Context */}
       <div className="fixed bottom-12 left-12 max-w-xs pointer-events-none opacity-20">
-        <p className="text-[9px] font-mono leading-relaxed uppercase tracking-widest">
+        <p className="text-[9px] font-mono leading-relaxed uppercase tracking-widest text-muted-foreground">
           Laboratory Note: Modern automated systems have reached 99.9% human mimicry. These tests measure the 0.1%
           irrationality factor that defines biological consciousness.
         </p>

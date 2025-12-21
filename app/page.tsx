@@ -53,7 +53,7 @@ const games = [
 
 export default function LandingPage() {
   return (
-    <div className="relative min-h-screen bg-background/10 text-foreground selection:bg-primary/10 font-sans">
+    <div className="relative min-h-screen bg-background/20 text-foreground selection:bg-primary/10 font-sans">
       {/* Minimal Nav */}
       <nav className="border-b border-border/40 backdrop-blur-md fixed top-0 left-0 right-0 z-50 bg-background/80">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
@@ -119,7 +119,7 @@ export default function LandingPage() {
               <Button
                 size="lg"
                 asChild
-                className="rounded-none h-12 sm:h-14 px-8 sm:px-12 bg-foreground text-background hover:bg-foreground/90 text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] transition-all group w-full sm:w-auto"
+                className="rounded-none h-12 sm:h-14 px-8 sm:px-12 bg-primary text-primary-foreground hover:bg-primary/90 text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] transition-all group w-full sm:w-auto"
               >
                 <Link href="#games" className="flex items-center justify-center gap-3">
                   Access Protocol
@@ -129,7 +129,7 @@ export default function LandingPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="rounded-none h-12 sm:h-14 px-8 sm:px-12 border-border/40 hover:bg-foreground hover:text-foreground text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] transition-all w-full sm:w-auto"
+                className="rounded-none h-12 sm:h-14 px-8 sm:px-12 border-border/40 hover:bg-accent hover:text-accent-foreground text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] transition-all w-full sm:w-auto"
               >
                 <Link href="https://mastrovia.com" target="_blank" className="flex items-center justify-center w-full">
                   The Studio

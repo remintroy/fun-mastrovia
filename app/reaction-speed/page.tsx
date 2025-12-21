@@ -238,9 +238,9 @@ export default function ReactionSpeed() {
           layout
           className={`relative w-full aspect-4/3 sm:aspect-video md:aspect-3/1 min-h-[350px] sm:min-h-[400px] md:min-h-0 rounded-none p-1 border transition-all duration-700 cursor-pointer overflow-hidden ${
             state === "waiting"
-              ? "border-amber-500/40 bg-amber-500/5 shadow-[0_0_50px_-20px_rgba(245,158,11,0.2)]"
+              ? "border-primary/40 bg-primary/5 shadow-[0_0_50px_-20px_--theme(--color-primary/20%)]"
               : state === "ready"
-              ? "border-primary/40 bg-primary/10 shadow-[0_0_100px_-20px_rgba(var(--primary),0.3)]"
+              ? "border-primary bg-primary/20 shadow-[0_0_100px_-20px_--theme(--color-primary/40%)]"
               : state === "early"
               ? "border-destructive/30 bg-destructive/5"
               : "border-border/60 bg-card/10 hover:border-primary/40 hover:bg-card/20"
@@ -253,7 +253,7 @@ export default function ReactionSpeed() {
           <div className="absolute inset-0 pointer-events-none opacity-20">
             <div
               className={`absolute inset-0 bg-radial-at-center from-current via-transparent to-transparent ${
-                state === "ready" ? "text-green-500" : state === "waiting" ? "text-amber-500" : "text-blue-500"
+                state === "ready" ? "text-primary" : state === "waiting" ? "text-muted-foreground" : "text-primary"
               }`}
             />
           </div>
@@ -300,16 +300,16 @@ export default function ReactionSpeed() {
                   {[...Array(3)].map((_, i) => (
                     <motion.div
                       key={i}
-                      className="w-2 h-2 rounded-full bg-amber-500"
+                      className="w-2 h-2 rounded-full bg-primary/60"
                       animate={{ opacity: [0.2, 1, 0.2] }}
                       transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
                     />
                   ))}
                 </div>
-                <h2 className="text-6xl sm:text-8xl md:text-9xl font-black text-amber-500 tracking-tighter italic">
+                <h2 className="text-6xl sm:text-8xl md:text-9xl font-black text-primary tracking-tighter italic">
                   WAIT...
                 </h2>
-                <div className="mt-6 px-6 py-2 rounded-full border border-amber-500/20 bg-amber-500/10 text-[10px] sm:text-sm font-mono text-amber-500 uppercase tracking-widest text-center mx-4">
+                <div className="mt-6 px-6 py-2 rounded-full border border-primary/20 bg-primary/10 text-[10px] sm:text-sm font-mono text-primary/80 uppercase tracking-widest text-center mx-4">
                   Analyzing Peripheral Drift
                 </div>
               </motion.div>
@@ -322,8 +322,8 @@ export default function ReactionSpeed() {
                 animate={{ scale: 1, opacity: 1 }}
                 className="h-full flex flex-col items-center justify-center"
               >
-                <div className="absolute inset-0 bg-green-500/10 animate-pulse" />
-                <h2 className="text-6xl sm:text-8xl md:text-[10rem] font-black text-green-400 tracking-tighter drop-shadow-[0_0_40px_rgba(74,222,128,0.5)]">
+                <div className="absolute inset-0 bg-primary/20 animate-pulse" />
+                <h2 className="text-6xl sm:text-8xl md:text-[10rem] font-black text-primary tracking-tighter drop-shadow-[0_0_40px_--theme(--color-primary/50%)]">
                   PULSE!
                 </h2>
               </motion.div>
@@ -458,7 +458,9 @@ export default function ReactionSpeed() {
                       </div>
                       <div
                         className={`w-1.5 h-1.5 rounded-full shadow-[0_0_8px] ${
-                          entry.time < 250 ? "bg-green-500 shadow-green-500/50" : "bg-primary shadow-primary/50"
+                          entry.time < 250
+                            ? "bg-primary shadow-primary/50"
+                            : "bg-muted-foreground shadow-muted-foreground/50"
                         }`}
                       />
                     </div>
@@ -485,8 +487,8 @@ export default function ReactionSpeed() {
               <div className="space-y-8">
                 {[
                   { label: "Neural Throughput", value: `${averageTime}ms`, color: "text-primary" },
-                  { label: "Biological Jitter", value: "±4.2ms", color: "text-amber-400" },
-                  { label: "Signal Velocity", value: "82 m/s", color: "text-green-400" },
+                  { label: "Biological Jitter", value: "±4.2ms", color: "text-muted-foreground" },
+                  { label: "Signal Velocity", value: "82 m/s", color: "text-primary/60" },
                 ].map((stat, i) => (
                   <div key={i} className="flex justify-between items-end group/stat">
                     <span className="text-[11px] text-muted-foreground uppercase tracking-[0.3em] font-mono group-hover/stat:text-foreground transition-colors">
@@ -538,7 +540,7 @@ export default function ReactionSpeed() {
                 <div className="bg-primary/5 border border-primary/20 p-8 hover:bg-primary/10 transition-all group scale-105 shadow-2xl">
                   <div className="text-primary text-xs font-mono uppercase tracking-widest mb-4">Elite Tier</div>
                   <h3 className="text-2xl font-black mb-3 text-primary">150ms - 200ms</h3>
-                  <p className="text-sm text-foreground/80 leading-relaxed font-bold italic">
+                  <p className="text-sm font-bold italic">
                     Professional gamers and athletes often inhabit this zone. This requires high-bandwidth neural
                     processing and intense focus.
                   </p>

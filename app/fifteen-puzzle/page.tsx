@@ -385,12 +385,12 @@ export default function FifteenPuzzleHome() {
                           key={`${rowIndex}-${colIndex}-${item}`}
                           onClick={() => handleTileMove(rowIndex, colIndex)}
                           className={cn(
-                            "relative group h-full w-full flex items-center justify-center text-3xl font-black rounded-sm transition-all duration-200 select-none overflow-hidden border-2",
+                            "relative group h-full w-full flex items-center justify-center text-3xl font-black rounded-md transition-all duration-200 select-none overflow-hidden border-2",
                             item === -1
                               ? "bg-transparent cursor-default border-transparent"
                               : isCorrect
                               ? "bg-card text-primary shadow-inner border-primary/50"
-                              : "bg-white text-black active:scale-95 hover:bg-white/95 shadow-2xl border-transparent opacity-90"
+                              : "bg-foreground text-background active:scale-95 hover:bg-foreground/95 shadow-2xl border-transparent opacity-90"
                           )}
                         >
                           {item !== -1 && (
