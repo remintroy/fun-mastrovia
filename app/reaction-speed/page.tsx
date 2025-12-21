@@ -16,6 +16,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 type State = "idle" | "waiting" | "ready" | "result" | "early";
 
@@ -117,76 +118,108 @@ export default function ReactionSpeed() {
   }, [history]);
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground font-sans selection:bg-primary/30 overflow-x-hidden pt-44 pb-24 md:pt-56 md:pb-32 px-4 sm:px-8 flex flex-col items-center">
-      {/* --- EXTRAORDINARY BACKGROUND --- */}
-      <div className="fixed inset-0 pointer-events-none">
-        {/* Deep Gradient Glow */}
-        <div className="absolute inset-0 bg-radial-at-t from-primary/10 via-transparent to-transparent" />
+    <div className="relative min-h-screen bg-background text-foreground font-sans selection:bg-primary/10 overflow-x-hidden pt-44 pb-24 md:pt-56 md:pb-32 px-4 sm:px-8 flex flex-col items-center">
+      {/* 🧬 Zen Laboratory Background (Mastrovia Standard) */}
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-20%,hsl(var(--muted)),transparent)]" />
+      <div className="fixed inset-0 -z-10 bg-grid opacity-[0.05] pointer-events-none" />
+      <div className="fixed inset-0 -z-10 bg-[url('/textures/grains.png')] opacity-[0.02] pointer-events-none" />
 
-        {/* Animated Particles */}
-        <div className="absolute inset-0 overflow-hidden opacity-30">
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="scanline" />
+        {/* Animated Particles (Laboratory Grade) */}
+        <div className="absolute inset-0 overflow-hidden opacity-10">
           {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-px h-[30vh] bg-linear-to-b from-transparent via-primary/20 to-transparent"
-              initial={{ top: "-30%", left: `${i * 20}%` }}
+              className="absolute w-px h-[40vh] bg-linear-to-b from-transparent via-primary/30 to-transparent"
+              initial={{ top: "-40%", left: `${i * 20}%` }}
               animate={{ top: "110%" }}
               transition={{
-                duration: 5 + i,
+                duration: 8 + i,
                 repeat: Infinity,
                 ease: "linear",
-                delay: i * 0.7,
+                delay: i * 0.8,
               }}
             />
           ))}
         </div>
-
-        {/* Technical Grid Overlay */}
-        <div className="absolute inset-0 opacity-10 bg-[linear-gradient(rgba(var(--foreground),0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(var(--foreground),0.1)_1px,transparent_1px)] bg-size-[40px_40px]" />
       </div>
 
       {/* --- HUD --- */}
-      <div className="fixed top-0 left-0 right-0 z-50 p-4 sm:p-6 md:p-12 bg-linear-to-b from-background via-background/90 to-transparent pointer-events-none border-b border-border/5">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-start justify-between gap-4 md:gap-6">
-          <div className="flex flex-col gap-2 md:gap-3 pointer-events-auto">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-[9px] md:text-[10px] font-mono text-muted-foreground hover:text-foreground transition-colors group"
-            >
-              <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
-              RETURN_TO_HOME
-            </Link>
-            <div className="flex flex-col gap-0.5">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                <span className="text-[9px] md:text-[12px] font-mono text-primary uppercase tracking-[0.4em]">
-                  System_Pulse.v2
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
+        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative w-8 h-8 flex items-center justify-center overflow-hidden">
+              <Image
+                src="/mastrovia-logo.webp"
+                alt="Mastrovia Logo"
+                width={32}
+                height={32}
+                className="object-contain transition-transform group-hover:scale-110"
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-bold tracking-tight text-lg uppercase leading-none">
+                Mastrovia <span className="text-muted-foreground/40 font-light italic text-sm">Lab</span>
+              </span>
+              <span className="text-[8px] font-mono text-muted-foreground/60 uppercase tracking-[0.2em] mt-1">
+                fun.mastrovia.com
+              </span>
+            </div>
+          </Link>
+
+          <div className="flex items-center gap-4 sm:gap-8">
+            <div className="flex items-center">
+              <div className="flex flex-col justify-center min-w-[70px] border-r border-border/20 pr-4">
+                <span className="text-[10px] uppercase tracking-[0.1em] text-muted-foreground/60 font-bold leading-none mb-1">
+                  Avg_Ms
+                </span>
+                <span className="text-lg font-mono leading-none tracking-tighter tabular-nums text-foreground/90 font-black">
+                  {averageTime}
                 </span>
               </div>
-              <h1 className="text-2xl md:text-5xl font-black tracking-tighter italic leading-none">REACTION_LAB</h1>
-            </div>
-          </div>
-
-          <div className="flex gap-6 md:gap-8 pointer-events-auto items-center sm:items-end">
-            <div className="flex flex-col border-l-2 border-border pl-3 md:pl-4">
-              <span className="text-[9px] md:text-[11px] font-mono text-muted-foreground uppercase tracking-widest leading-none mb-1">
-                Avg_Ms
-              </span>
-              <span className="text-base md:text-2xl font-bold tabular-nums text-foreground">{averageTime}</span>
-            </div>
-            <div className="flex flex-col border-l-2 border-border pl-3 md:pl-4">
-              <span className="text-[9px] md:text-[11px] font-mono text-muted-foreground uppercase tracking-widest leading-none mb-1">
-                Stability
-              </span>
-              <span className="text-base md:text-2xl font-bold text-green-500/80">98.4%</span>
+              <div className="flex flex-col justify-center min-w-[70px] pl-4">
+                <span className="text-[10px] uppercase tracking-[0.1em] text-muted-foreground/60 font-bold leading-none mb-1">
+                  Trials
+                </span>
+                <span className="text-lg font-mono leading-none tracking-tighter tabular-nums text-foreground/90 font-black">
+                  {history.length}
+                </span>
+              </div>
             </div>
           </div>
         </div>
+      </nav>
+
+      {/* Subject Context Header */}
+      <header className="fixed top-24 left-0 right-0 z-40 px-6 pointer-events-none">
+        <div className="container mx-auto max-w-7xl flex flex-col gap-4">
+          <Link
+            href="/"
+            className="pointer-events-auto w-fit flex items-center gap-2 text-[10px] font-mono text-muted-foreground hover:text-primary transition-colors group mb-2 border border-border/40 px-3 py-1 bg-background/50 backdrop-blur-sm"
+          >
+            <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
+            SUBJECT_EXIT_PROTOCOL
+          </Link>
+          <div className="hidden md:block">
+            <div className="text-[10px] font-mono text-primary/60 mb-1 tracking-[0.4em] uppercase">
+              // research_diagnostic_03
+            </div>
+            <h2 className="text-4xl font-black tracking-tighter uppercase italic leading-none">Synapse Pulse</h2>
+          </div>
+        </div>
+      </header>
+
+      <div className="fixed bottom-12 left-12 z-50 opacity-20 hidden lg:block select-none pointer-events-none">
+        <div className="text-[8px] font-mono uppercase tracking-[0.8em] mb-2 scale-y-110">fun.mastrovia.com</div>
+        <div className="h-px w-24 bg-foreground/20" />
       </div>
 
-      <div className="fixed bottom-6 md:bottom-12 right-6 md:right-12 z-50 text-right opacity-40 hidden sm:block">
-        <div className="text-[12px] font-mono uppercase tracking-[0.4em]">Hardware Architecture Laboratory</div>
-        <div className="text-[10px] font-mono italic">Validated for biological entities only.</div>
+      <div className="fixed bottom-12 right-12 z-50 text-right opacity-30 shadow-2xl pointer-events-none select-none hidden sm:block">
+        <div className="text-[10px] font-mono uppercase tracking-[0.4em] text-foreground/80 mb-1">
+          Mastrovia_Research_Unit
+        </div>
+        <div className="text-[9px] font-mono italic text-muted-foreground">Validated biological presence required.</div>
       </div>
 
       {/* --- MAIN INTERFACE --- */}
@@ -195,16 +228,19 @@ export default function ReactionSpeed() {
         <motion.div
           onPointerDown={handleClick}
           layout
-          className={`relative w-full aspect-4/3 sm:aspect-video md:aspect-3/1 min-h-[350px] sm:min-h-[400px] md:min-h-0 rounded-3xl sm:rounded-4xl p-1 border transition-all duration-700 cursor-pointer overflow-hidden ${
+          className={`relative w-full aspect-4/3 sm:aspect-video md:aspect-3/1 min-h-[350px] sm:min-h-[400px] md:min-h-0 rounded-none p-1 border transition-all duration-700 cursor-pointer overflow-hidden ${
             state === "waiting"
-              ? "border-amber-500/20 bg-amber-500/5 shadow-[0_0_50px_-20px_rgba(245,158,11,0.2)]"
+              ? "border-amber-500/40 bg-amber-500/5 shadow-[0_0_50px_-20px_rgba(245,158,11,0.2)]"
               : state === "ready"
-              ? "border-green-500/40 bg-green-500/10 shadow-[0_0_100px_-20px_rgba(34,197,94,0.3)]"
+              ? "border-primary/40 bg-primary/10 shadow-[0_0_100px_-20px_rgba(var(--primary),0.3)]"
               : state === "early"
               ? "border-destructive/30 bg-destructive/5"
-              : "border-border bg-card/5 hover:bg-accent/8"
+              : "border-border/60 bg-card/10 hover:border-primary/40 hover:bg-card/20"
           }`}
         >
+          {/* Scanline Effect */}
+          <div className="scanline opacity-20" />
+
           {/* Inner Glow Layer */}
           <div className="absolute inset-0 pointer-events-none opacity-20">
             <div
