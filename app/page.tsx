@@ -17,6 +17,39 @@ const games = [
     href: "/fifteen-puzzle",
     difficulty: "Medium",
   },
+  {
+    id: "scale-of-computing",
+    title: "The Silicon Scale",
+    description:
+      "An immersive journey through the physical dimensions of computing. From subatomic particles to the global internet.",
+    image: "/scale-of-computing/images/banner.png",
+    category: "Simulation",
+    stack: "React, Framer Motion, CSS",
+    href: "/scale-of-computing",
+    difficulty: "Beginner",
+  },
+  {
+    id: "reaction-speed",
+    title: "Synapse Pulse",
+    description:
+      "Test your physical interaction throughput. Benchmark your reaction time against historical hardware interrupts.",
+    image: "/reaction-speed/images/banner.png",
+    category: "Biometrics",
+    stack: "React, LocalStorage, CSS",
+    href: "/reaction-speed",
+    difficulty: "Medium",
+  },
+  {
+    id: "captcha-gauntlet",
+    title: "The Turing Test",
+    description:
+      "A parody series of increasingly absurd human-validation tests. Prove you have the irrationality of biological life.",
+    image: "/captcha-gauntlet/images/banner.png",
+    category: "Psychology",
+    stack: "React, Framer Motion",
+    href: "/captcha-gauntlet",
+    difficulty: "Hard",
+  },
 ];
 
 export default function LandingPage() {
