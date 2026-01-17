@@ -3,6 +3,7 @@ import Script from "next/script";
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
+import PlausibleAnalytics from "@/components/plausible";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,8 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <script defer data-domain="fun.mastrovia.com" src="https://plausible.remin.in/js/script.outbound-links.js"></script>
-        <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+        <PlausibleAnalytics />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
